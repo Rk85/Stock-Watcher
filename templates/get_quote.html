@@ -1,0 +1,86 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<h3 class="text-center"> Stock Details </h3>
+	</div>
+	<div class="row-fluid">
+		<div class="span5 stock-ticker" data-bind="visible: !companyDetails()"> 
+			<form>
+	            <span>Stock Ticker</span>
+       	        <input id="stock_ticker" placeholder="stock ticker" type="search">
+			</form>
+		</div>
+		<div class="span5 stock-ticker"> 
+			<div data-bind="visible: companyDetails()" >
+   	            <table width=100% id="company_details_table" class="display table table-striped table-bordered table-hover table-condensed">
+                    <tbody data-bind="with: companyDetails">
+                   	    <tr><td>Company Name</td>
+                       	    <td data-bind="text:name"></td>
+						</tr>
+                   	    <tr><td>Stock Ticker</td>
+                       	    <td data-bind="text:symbol"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+           </div>
+	</div>
+	<div class="row-fluid" data-bind="if: companyDetails">
+		History Graph
+	</div>
+</div>
+<script>
+
+(function(stockWatcher, $, undefined){
+    stockWatcher.quoteDetails = function quoteDetails(data){
+        var self = this;
+		self.companyDetails = ko.observable();
+		self.substringMatcher = function(items) {
+			return function findMatches(q, cb) {
+				var matches, substrRegex;
+				matches = [];
+				substrRegex = new RegExp("^"+q, 'i');
+				$.each(items, function(i, item) {
+					if (substrRegex.test(item.symbol) || substrRegex.test(item.companyName)) {
+						matches.push({ companyName: item.companyName,
+										symbol: item.symbol
+									 });
+					}
+				});
+				cb(matches);
+			};
+		}; 
+		self.allCompanies = [
+						{companyName:'Alabama', symbol: 'Alab'},
+						{companyName:'Alaska', symbol: 'Alas'},
+						{companyName:'California', symbol: 'Clas'}
+					]
+		self.init = function init(){
+			$('#stock_ticker').typeahead({
+					hint: true,
+					highlight: true,
+					minLength: 1
+				},
+				{
+					name: 'states',
+					displayKey: 'companyName',
+					source: self.substringMatcher(self.allCompanies),
+					templates: {
+						suggestion: function(item){return item.companyName}
+					}
+				}).bind('typeahead:selected', function(eventObject, item, dataSet) {
+					self.companyDetails({
+						name: item.companyName,
+						symbol: item.symbol
+					});
+				});
+			}
+    }
+}(Application.namespace("Application.stockWatcher"), jQuery));
+
+var applyFormBindings = function(data, tab_id){
+    var model = new Application.stockWatcher.quoteDetails(data);
+    ko.applyBindings(model, $(tab_id)[0]);
+    model.init();
+};
+</script>
+

@@ -1,4 +1,5 @@
 (function( app, $, undefined ) {
+
 $(document).ajaxStart(function(){
    	 $('#loader').show();
     });

@@ -1,0 +1,101 @@
+<div class="container-fluid" id="invest_portfolio">
+	<div class="row-fluid">
+		<div class="span6 portfolio">
+            <div class="row-fluid">
+                <div class="portfolio-header">
+                    <p class="portfolio-header-desc" > MY NETWORTH </p>
+                    <p>
+                        <span class="portfolio-header-value" > 877,234 </span>
+                        <span class="portfolio-positive"><strong>+10,000</strong> </span>
+                        <span class="portfolio-positive">(+1.78%)</span>
+                        <span> <img src="/static_files/images/up.gif" class="img-circle" height="22" width="22"></img></span>
+                        <span> <img src="/static_files/images/down.gif" class="img-circle" height="22" width="22"></img></span>
+                    </p>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 portfolio-lower1">
+                    <p class="portfolio-header-desc" > MAX GAINER </p>
+                    <p class="portfolio-lower-company">Company Name</p>
+                    <p class="portfolio-lower-value" > 30.50 <p>
+                    <p>
+                        <span class="portfolio-lower-positive"><strong>+5.50 </strong></span>
+                        <span class="portfolio-lower-positive">(+5.50%)</span>
+                        <span> <img src="/static_files/images/up.gif" class="img-circle" height="20" width="20"></img></span>
+                    <p>
+                </div>
+                <div class="span6 portfolio-lower2">
+                    <p class="portfolio-header-desc" > MAX LOSER </p>
+                    <p class="portfolio-lower-company">Company Name</p>
+                    <p class="portfolio-lower-value" > 30.50 <p>
+                    <p>
+                        <span class="portfolio-lower-negative"><strong>+5.50 </strong></span>
+                        <span class="portfolio-lower-negative">(+5.50%)</span>
+                        <span> <img src="/static_files/images/down.gif" class="img-circle" height="20" width="20"></img></span>
+                    <p>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            Graph
+        </div>
+	</div>
+	<div class="row-fluid trans-div">
+      <div class="trans-table-head-append">
+      </div>
+	   <table class="table trans-table">
+	       <thead>
+	           <tr class="trans-table-head" data-bind="foreach: tableHeaders">
+	               <th><span data-bind="text: $data"></span></th>
+	           </tr>
+	       </thead>
+	       <tbody  data-bind="foreach: tableRows">
+	           <tr class="company-name">
+	               <td>
+                        <a data-bind="css: 'company-name', text: name1,
+                           attr: { 'data-toggle':'collapse', 'data-target': link_id}"></a>
+                    </td>
+	               <td><span data-bind="text: name2"></span></td>
+	               <td><span data-bind="text: name3"></span></td>
+	           </tr>
+	           <tr class="company-details">
+	               <td colspan="3">
+	               <div data-bind="css: 'collapse', attr: {'id': name1}" style="background: green">
+                     Testing
+                   </div>
+                   </td>
+                </tr>
+            </tbody>
+	   </table>
+	   <div class="trans-table-tail-append">
+      </div>
+	</div>
+</div>
+<script>
+
+(function(stockWatcher, $, undefined){
+    stockWatcher.quoteDetails = function quoteDetails(data){
+        var self = this;
+        self.tableHeaders = ko.observableArray(['name1', 'name2', 'name3']);
+        self.tableRows = ko.observableArray([
+            {
+                name1: 'NAME1',
+                link_id: '#NAME1',
+                name2: 'NAME2',
+                name3: 'NAME3',
+            },
+            {
+                name1: 'NAME4',
+                link_id: '#NAME4',
+                name2: 'NAME5',
+                name3: 'NAME6',
+            }
+            ]);
+    }
+}(Application.namespace("Application.stockWatcher"), jQuery));
+
+var applyFormBindings = function(data, tab_id){
+    var model = new Application.stockWatcher.quoteDetails(data);
+    ko.applyBindings(model, $(tab_id)[0]);
+};
+</script>

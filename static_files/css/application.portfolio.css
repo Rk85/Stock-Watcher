@@ -1,0 +1,64 @@
+.portfolio{
+    background: #D9EDF7 none repeat scroll 0 0;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888888;
+}
+.portfolio-header{
+    border-bottom: 1px double #9cd77b;
+    padding: 10px;
+}
+.portfolio-header-desc{
+    font: 15px/16px Arial;
+    color: #646464;
+    text-decoration: none;
+    padding-bottom: 5px;
+    margin: 0px;
+}
+.portfolio-header-value{
+    color: #444444;
+    font: bold 28px/28px Arial;
+}
+.portfolio-positive{
+    color: #53a503;
+    font: 18px/18px Arial;
+}
+.portfolio-negative{
+    color: #c20000;
+    font: 18px/18px Arial;
+}
+
+.portfolio-lower1{
+    border-right: 1px double #9cd77b;
+    padding: 10px;
+}
+.portfolio-lower2{
+    padding: 10px;
+}
+
+.portfolio-lower-company{
+    font: bold 18px/18px Arial;
+    color: #1e5695;
+    text-decoration: none;
+    padding-bottom: 5px;
+    margin: 0px;
+}
+.portfolio-lower-value{
+    color: #444444;
+    font: bold 20px/20px Arial;
+    padding: 0px;
+    margin: 0px;
+}
+.portfolio-lower-positive{
+    color: #53a503;
+    font: 16px/16px Arial;
+    padding: 0px;
+    margin: 0px;
+}
+.portfolio-lower-negative{
+    color: #c20000;
+    font: 16px/16px Arial;
+    padding: 0px;
+    margin: 0px;
+}

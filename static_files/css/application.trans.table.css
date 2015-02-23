@@ -1,0 +1,52 @@
+.trans-div{
+    margin-top: 30px;
+}
+.trans-table{
+    border: 1px double #006699;
+    border-bottom: none;
+    padding: 0px;
+    margin: 0px;
+}
+.trans-table-head-append{
+    background: #006699;
+    border-top-left-radius:2em;
+    border-top-right-radius:2em;
+    padding: 5px;
+}
+.trans-table-head{
+    background: #006699;
+    color: #ffffff;
+}
+.trans-table-head th span{
+    text-align: center;
+    margin: 5px;
+}
+.company-name{
+    font: bold 12px/12px Arial;
+    color: #1e5695;
+    text-decoration: none;
+    cursor: pointer;
+}
+.company-details td{
+    border-top: none;
+    border-bottom: 1px double #006699;
+    padding: 0px;
+    margin: 0px;
+}
+.trans-table tr:last-child td{
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+.trans-table-tail-append{
+    border: 1px double #006699;
+    border-bottom-right-radius:2em;
+    border-bottom-left-radius:2em;
+    border-top: none;
+    padding: 5px;
+    margin-bottom: 15px;
+    
+}
+
+
+

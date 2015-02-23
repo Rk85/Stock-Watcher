@@ -27,7 +27,7 @@ def get_all_companies():
             })
     return companies
 
-def get_symbol_details(symbol):a
+def get_symbol_details(symbol):
     '''
         Description: Given a symbol it retrieves the details about the 
                       symbol
@@ -94,6 +94,24 @@ def get_quote(symbol=None):
                                             'quote_details': get_symbol_details(symbol),
                                             'trade_details': get_trade_details(symbol)
                                         }
+                        }
+            resp = make_response(jsonify(response_data), 200)
+            return resp
+
+@web_routes.route('/invest', methods=['GET'])
+@web_routes.route('/quote/<string:symbol>', methods=['GET'])
+def get_stock_invest(symbol=None):
+    """
+        Description : View function to Handle the clients display requests
+        
+        input_param : symbol - selected symbol 
+        input_type : string
+    
+    """
+    if request.method == 'GET':
+        if not symbol:
+            response_data = {  'form' : render_template('get_invest.html'),
+                           'response_data': {}
                         }
             resp = make_response(jsonify(response_data), 200)
             return resp

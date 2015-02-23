@@ -1,26 +1,19 @@
-var Application = window.Application || {};
-Application.Routing = {
-		Configure : function(){
-			Application.Routing.Sammy = $.sammy("#main", function(){
-				this.get("#main", function(context){
-				});
-				this.get("#/stock/quote", function(context){
-					var url = "/stock/quote"
-					Application.Tab.addTab("Get Stock Details" , url);
-				});
-				this.get("#/portfolio", function(context){
-					var url = "/portfolio"
-					Application.Tab.addTab("New Client Add" , url );
-				});
-				this.get("#/about", function(context){
-					context.log("#/about");
-					var url = "/about"
-					Application.Tab.addTab("About Page" , url, true);
-				});
+(function( Application, $, undefined ) {
 
-			});
-		},
-		run : function(){
-			Application.Routing.Sammy.run("#main");
-		}
-}
+    Application.Routing = {
+        Configure : function(){
+            Application.Routing.Sammy = $.sammy("#main", function(){
+                this.get("#home", function(context){
+                    alert("home");
+                });
+    			this.get("#/stock/invest", function(context){
+    				var url = "/stock/invest"
+    				Application.Tab.GetContent(url);
+    			});
+    	   })
+        },
+        run : function(){
+            Application.Routing.Sammy.run("#main");
+        }
+    }
+}( window.Application = window.Application || {}, jQuery ));

@@ -1,0 +1,74 @@
+<div class="container-fluid" id="invest_portfolio">
+	<div class="row-fluid">
+		<div class="span6 portfolio">
+		  {% block portfolio_header %}{% endblock portfolio_header %}
+		  {% block portfolio_tail %}{% endblock portfolio_tail %}
+        </div>
+        <div class="span6">
+            Graph
+        </div>
+	</div>
+	<div class="row-fluid trans-div">
+        {% block portfolio_trans %}{% endblock portfolio_trans %}
+	</div>
+</div>
+<script>
+
+(function(stockWatcher, $, undefined){
+    stockWatcher.quoteDetails = function quoteDetails(data){
+        var self = this;
+        self.totalDetails = ko.computed(function(){
+            return {
+                totalValue: "877,234",
+                dayChange: "+10000",
+                dayChangePercent: "(+15.0%)",
+                dayChangeInc: true
+            }
+        });
+        self.changeImage = ko.computed(function(){
+            if (self.totalDetails().dayChangeInc){
+                return "/static_files/images/up.gif"
+            }
+            return "/static_files/images/down.gif"
+        })
+        
+        self.maxGainerDetails = ko.computed(function(){
+            return {
+                maxGainerName: 'Company Name',
+                maxGainerValue: 30.50,
+                maxGainerChange: "+5.50",
+                maxGainerChangePercent: "(+5.50)",
+            }
+        });
+        self.maxLoserDetails = ko.computed(function(){
+            return {
+                maxLoserName: 'Company Name',
+                maxLoserValue: 30.50,
+                maxLoserChange: "+5.50",
+                maxLoserChangePercent: "(+5.50)",
+            }
+        });
+        
+        self.tableHeaders = ko.observableArray(['name1', 'name2', 'name3']);
+        self.tableRows = ko.observableArray([
+            {
+                name1: 'NAME1',
+                link_id: '#NAME1',
+                name2: 'NAME2',
+                name3: 'NAME3',
+            },
+            {
+                name1: 'NAME4',
+                link_id: '#NAME4',
+                name2: 'NAME5',
+                name3: 'NAME6',
+            }
+            ]);
+    }
+}(Application.namespace("Application.stockWatcher"), jQuery));
+
+var applyFormBindings = function(data, tab_id){
+    var model = new Application.stockWatcher.quoteDetails(data);
+    ko.applyBindings(model, $(tab_id)[0]);
+};
+</script>

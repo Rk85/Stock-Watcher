@@ -4,7 +4,6 @@
         Configure : function(){
             Application.Routing.Sammy = $.sammy("#main", function(){
                 this.get("#home", function(context){
-                    alert("home");
                 });
     			this.get("#/stock/invest", function(context){
     				var url = "/stock/invest"

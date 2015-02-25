@@ -62,3 +62,7 @@
     padding: 0px;
     margin: 0px;
 }
+.portfolio-change{
+    cursor: pointer;
+    color: #006699;
+}

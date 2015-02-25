@@ -19,7 +19,7 @@
 }
 .trans-table-head th span{
     text-align: center;
-    margin: 5px;
+    margin: 0px;
 }
 .company-name{
     font: bold 12px/12px Arial;
@@ -48,5 +48,13 @@
     
 }
 
-
-
+.profile-details-text{
+    margin-left: 10px;
+}
+.profile-refresh-text{
+    margin-right: 10px;
+}
+.profile-details select{
+    border: 1px double #006699;
+    
+}

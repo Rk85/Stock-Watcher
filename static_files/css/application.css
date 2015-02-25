@@ -78,16 +78,14 @@ bottom: 0;
 
 .navbar-custom {
     margin-bottom: 0px;
-    height: 35px;
-    line-height: 10px;
+    height: 30px;
 }
 .navbar-custom .navbar-inner {
-    background: white url(/static_files/images/tabblue.gif) center center repeat-x; 
+    background: #006699; 
     border:none;
-    min-height: 40px;
+    min-height: 30px;
     height: 40px;
     box-shadow: none;
-    margin: 0px;
 }
 
 .navbar-custom .nav  li  a,
@@ -96,21 +94,21 @@ bottom: 0;
     border-right: 1px solid #ffffff;
     box-shadow: none;
     color: #ffffff;
-    height: 20px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    height: 30px;
+    padding-bottom: 0px;
+    padding-top: 7px;
     text-shadow: none;
 }
 .navbar-custom .nav  li.active  a, 
 .navbar-custom .nav  li.active  a:hover,
 .navbar-custom .nav  li.active  a:focus  {
-    background: white url(/static_files/images/taborange.gif) center center repeat-x;
+    background: #A31919;
     border-right: 1px solid #ffffff;
     box-shadow: none;
     color: #ffffff;
-    height: 20px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    height: 29px;
+    padding-bottom: 0px;
+    padding-top: 6px;
     text-shadow: none;
 }
 .center-content {

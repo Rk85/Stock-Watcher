@@ -74,34 +74,42 @@
 {% endblock profile_select_div %}
 
 {% block portfolio_company_details %}
-<div data-bind="css: 'collapse', attr: {'id': name1}" style="background: green">
+<div class="collapse company-details-div" data-bind="attr: {'id': companyName}">
     Testing
 </div>
 {% endblock portfolio_company_details %}
 
 {% block portfolio_company_details_row %}
-<tr class="company-details">
-    <td colspan="4"> {{ self.portfolio_company_details() }}</td>
+<tr class="company-details-row">
+    <td colspan="12"> {{ self.portfolio_company_details() }}</td>
 </tr>
 {% endblock portfolio_company_details_row %}
 
 {% block portfolio_company_row %}
-<tr class="company-name">
+<tr>
     <td>
-        <a data-bind="css: 'company-name', text: name1,
-            attr: { 'data-toggle':'collapse', 'data-target': link_id}">
+        <a data-bind="css: 'company-name-column', text: companyName,
+            attr: { 'data-toggle':'collapse', 'data-target': '#'+companyName}">
         </a>
     </td>
-    <td><span data-bind="text: name2"></span></td>
-    <td><span data-bind="text: name3"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: quantity"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: invAmount"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: invPrice"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: livePrice"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: todayChange"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: todayGain"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: todayPercentage"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: totalChange"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: totalGain"></span></td>
+    <td class="company-share-details-column"><span data-bind="text: totalPercentage"></span></td>
     <td>
         <i data-bind="click: function(data, event) { 
                         $root.transAction(false, data, event)},
-                        css: 'icon-remove-sign'"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                        css: 'icon-remove-sign, company-action-column'"></i>&nbsp;&nbsp;&nbsp;&nbsp;
         <i data-bind="attr: { 
                                 'data-toggle':'modal',
                                 'data-target':'#tansAddModal'
-                        }, css: 'icon-plus-sign'">
+                        }, css: 'icon-plus-sign, company-action-column'">
         </i>&nbsp;&nbsp;&nbsp;&nbsp;
     </td>
 </tr>
@@ -110,11 +118,22 @@
 {% block portfolio_trans %}
 <div class="trans-table-head-append">
 </div>
-<div>
+<div class="trans-table-div">
     <table class="table trans-table">
-        <thead>
-            <tr class="trans-table-head" data-bind="foreach: tableHeaders">
-                <th><span data-bind="text: $data"></span></th>
+        <thead class="trans-table-head" >
+            <tr>
+                <th class="trans-table-head-company"-><span>Company</span></th>
+                <th><span>Quantity</span></th>
+                <th><span>Invoice Amount</span></th>
+                <th><span>Inv Price</span></th>
+                <th><span>Live Price</span></th>
+                <th><span>Day's Change</span></th>
+                <th><span>Day's Gain</span></th>
+                <th><span>Day's Gain%</span></th>
+                <th><span>Total Change</span></th>
+                <th><span>Total Gain</span></th>
+                <th><span>Total Gain%</span></th>
+                <th><span></span></th>
             </tr>
         </thead>
         <tbody  data-bind="foreach: availableRows">
@@ -126,15 +145,41 @@
 <div class="trans-table-tail-append">
 </div>
 {% endblock portfolio_trans %} 
+
+{% block trans_add_modal_body %}
+<table class="table">
+            <thead class="trans-table-head" >
+            <tr>
+                <th class="trans-table-head-company"-><span>Company</span></th>
+                <th><span>Price</span></th>
+                <th><span>Date</span></th>
+                <th><span>Shares</span></th>
+                <th><span>Details</span></th>
+                <th><span><i data-bind="css: 'icon-plus-sign, company-action-column'"></i></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a data-bind="css: 'company-name-column'">Test</a></td>
+                <td><input type="text" class="input-mini"/></td>
+                <td><input type="text" class="input-mini"/></td>
+                <td><input type="text" class="input-mini"/></td>
+                <td><input type="text" class="input-medium"/></td>
+                <td><i data-bind="css: 'icon-remove-sign, company-action-column'"></i>
+                </td>
+            </tr>
+        </tbody>
+</table>
+{% endblock trans_add_modal_body %} 
   
 {% block trans_add_modal %}
-<div id="tansAddModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="tansAddModal" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3 id="myModalLabel">Modal header</h3>
+        <h3 id="myModalLabel">Add New Transaction</h3>
     </div>
     <div class="modal-body">
-        <p>One fine bod</p>
+        {{ self.trans_add_modal_body() }}
     </div>
     <div class="modal-footer">
         <button class="btn, modal-close-button" data-dismiss="modal" aria-hidden="true">Close</button>

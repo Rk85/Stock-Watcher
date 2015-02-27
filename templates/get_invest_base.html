@@ -23,27 +23,7 @@
         self.showToday = ko.observable(true);
         self.changePortfolioType = function(){
             self.showToday(!self.showToday());
-        }
-        self.transAction = function(isAdd, rowData, event){
-            if ( isAdd ){
-                alert('Add')
-            }
-            else{
-                var result = Application.showAlert(
-                    {   
-                        msg: "Do you want to delete this Company?",
-                        buttons: {Yes: true, No: false },
-                        focus: 1,
-                        callBack: function(result){
-                            if (result){
-                                alert(JSON.stringify(rowData.name1));
-                                self.tableRows.remove(rowData);
-                            }
-                        }
-                    }
-                );
-            }
-        }
+        } 
         self.todayDetails = ko.observable({
             totalValue: "877,234",
             totalChange: "+10000",
@@ -108,20 +88,41 @@
         
         self.selectedRefreshRate = ko.observable();
         
-        self.tableHeaders = ko.observableArray(['name1', 'name2', 'name3', 'Action']);
         self.tableRows = ko.observableArray([
             {
-                name1: 'NAME1',
-                link_id: '#NAME1',
-                name2: 'NAME2',
-                name3: 'NAME3',
+                companyName: 'NAME1',
+                invPrice: 20,
+                quantity: 100,
+                invAmount: 5000,
+                
+                livePrice: 60,
+                
+                todayChange: 10,
+                todayGain: 50,
+                todayPercentage: '2%',
+                
+                totalChange: 10,
+                totalGain: 50,
+                totalPercentage: '2%',
+                
                 profileId: 1
             },
             {
-                name1: 'NAME4',
-                link_id: '#NAME4',
-                name2: 'NAME5',
-                name3: 'NAME6',
+                companyName: 'NAME2',
+                invPrice: 20,
+                quantity: 100,
+                invAmount: 5000,
+                
+                livePrice: 60,
+                
+                todayChange: 10,
+                todayGain: 50,
+                todayPercentage: '2%',
+                
+                totalChange: 10,
+                totalGain: 50,
+                totalPercentage: '2%',
+                
                 profileId: 2
             }
             ]);
@@ -133,6 +134,27 @@
             }
             return [];
         });
+        self.transAction = function(isAdd, rowData, event){
+            if ( isAdd ){
+                alert('Add')
+            }
+            else{
+                var result = Application.showAlert(
+                    {   
+                        msg: "Do you want to delete this Company?",
+                        buttons: {Yes: true, No: false },
+                        focus: 1,
+                        callBack: function(result){
+                            if (result){
+                                alert(JSON.stringify(rowData.companyName));
+                                self.tableRows.remove(rowData);
+                            }
+                        }
+                    }
+                );
+            }
+        }
+       
         self.availableQoutes = ko.observableArray([
             
         ])

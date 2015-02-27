@@ -36,6 +36,7 @@ bottom: 0;
 
 .alert-danger{
 	color: red;
+	background: red;
 }
 
 .alert-success{

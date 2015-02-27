@@ -11,6 +11,7 @@
 	<div class="row-fluid trans-div">
         {% block profile_select_div %}{% endblock profile_select_div %}
         {% block portfolio_trans %}{% endblock portfolio_trans %}
+        {% block trans_add_modal %}{% endblock trans_add_modal %}
 	</div>
 </div>
 <script>
@@ -22,6 +23,26 @@
         self.showToday = ko.observable(true);
         self.changePortfolioType = function(){
             self.showToday(!self.showToday());
+        }
+        self.transAction = function(isAdd, rowData, event){
+            if ( isAdd ){
+                alert('Add')
+            }
+            else{
+                var result = Application.showAlert(
+                    {   
+                        msg: "Do you want to delete this Company?",
+                        buttons: {Yes: true, No: false },
+                        focus: 1,
+                        callBack: function(result){
+                            if (result){
+                                alert(JSON.stringify(rowData.name1));
+                                self.tableRows.remove(rowData);
+                            }
+                        }
+                    }
+                );
+            }
         }
         self.todayDetails = ko.observable({
             totalValue: "877,234",
@@ -112,6 +133,9 @@
             }
             return [];
         });
+        self.availableQoutes = ko.observableArray([
+            
+        ])
     }
 }(Application.namespace("Application.stockWatcher"), jQuery));
 

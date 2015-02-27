@@ -2,13 +2,13 @@
 {% block title %}Stock Watcher{% endblock title %}
 
 {% block leftSidebar %}
-<div class="span2" style="background-color: red">
+<div class="span1" style="background-color: red">
 	Test1
 </div>
 {% endblock leftSidebar %}	
 
 {% block rightSidebar %}
-<div class="span2" style="background-color: blue">
+<div class="span1" style="background-color: blue">
 	Test1
 </div>
 {% endblock rightSidebar %}	
@@ -67,7 +67,7 @@
 	<div class="container-fluid">
 		<div class="row-fluid">
 			{{ self.leftSidebar() }}
-			<div class="span8" >
+			<div class="span10" >
 				{{ self.centerTop() }}
 				<div class="row-fluid">
 					{{ self.centerTabs() }}
@@ -82,7 +82,7 @@
 
 {% block loader %}	
 <div id="loader">
-	<img id="loading-image" src="/static_files/images/ajax-loader.gif" > </img>
+	<img id="loading-image" src="/static_files/img/ajax-loader.gif" > </img>
 </div>
 {% endblock loader %}
 

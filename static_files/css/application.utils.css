@@ -1,0 +1,41 @@
+.jqiform{
+    margin-bottom: 5px;
+}
+div.jqi .jqibuttons{
+    background: #ffffff; 
+    border: none;
+    text-align:right;
+    padding: 0px
+}
+div.jqi .jqibuttons button{
+    margin-right: 3px;
+    padding: 8px 20px;
+    color: #ffffff;
+    background: #A31919;
+}
+div.jqi .jqibuttons button.jqidefaultbutton{
+    color: #ffffff;
+    background: #006699;
+}
+div.jqi .jqimessage{
+    color: #c20000;
+    font-size: 12px;
+}
+
+.modal-close-button, 
+.modal-close-button:hover{
+    color: #ffffff;
+    background: #A31919;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    border: 2px outset buttonface;
+    border-color: #A31919;
+    border-radius: 6px;
+    padding: 4px 12px;
+}
+.modal-default-button, 
+.modal-default-button:hover,
+.modal-default-button:focus{
+    color: #ffffff;
+    background: #006699;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+}

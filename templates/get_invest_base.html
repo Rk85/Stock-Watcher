@@ -1,168 +1,156 @@
 <div class="container-fluid" id="invest_portfolio">
-	<div class="row-fluid">
-        <div class="span6 portfolio">
-            {% block portfolio_header %}{% endblock portfolio_header %}
-            <div class="row-fluid">
-                {% block portfolio_max_gainer %}{% endblock portfolio_max_gainer %}
-                {% block portfolio_max_loser %}{% endblock portfolio_max_loser %}
-            </div>
-        </div>
+  <div class="row-fluid">
+    <div class="span6 portfolio">
+      {% block portfolio_header %}{% endblock portfolio_header %}
+      <div class="row-fluid">
+        {% block portfolio_max_gainer %}{% endblock portfolio_max_gainer %}
+        {% block portfolio_max_loser %}{% endblock portfolio_max_loser %}
+      </div>
     </div>
-	<div class="row-fluid trans-div">
-        {% block profile_select_div %}{% endblock profile_select_div %}
-        {% block portfolio_trans %}{% endblock portfolio_trans %}
-        {% block trans_add_modal %}{% endblock trans_add_modal %}
-	</div>
+  </div>
+  <div class="row-fluid trans-div">
+    {% block profile_select_div %}{% endblock profile_select_div %}
+    {% block portfolio_trans %}{% endblock portfolio_trans %}
+  </div>
 </div>
+{% include "utils/modals.html" %}
+
 <script>
 
-(function(stockWatcher, $, undefined){
-    stockWatcher.quoteDetails = function quoteDetails(data){
-        var self = this;
-        self.userName = ko.observable('Guest');
-        self.showToday = ko.observable(true);
-        self.changePortfolioType = function(){
-            self.showToday(!self.showToday());
-        } 
-        self.todayDetails = ko.observable({
-            totalValue: "877,234",
-            totalChange: "+10000",
-            changePercent: "(+15.0%)",
-            valueInc: true,
-            maxGainerName: 'Company Name',
-            maxGainerValue: 30.50,
-            maxGainerChange: "+5.50",
-            maxGainerChangePercent: "(+5.50)",
-            maxLoserName: 'Company Name',
-            maxLoserValue: 30.50,
-            maxLoserChange: "+5.50",
-            maxLoserChangePercent: "(+5.50)"
-        })
-        self.totalDetails = ko.observable({
-             totalValue: "800,000",
-             totalChange: "+1000",
-             changePercent: "(+10.0%)",
-             valueInc: true,
-             maxGainerName: 'Company Net',
-             maxGainerValue: 50.50,
-             maxGainerChange: "+2.50",
-             maxGainerChangePercent: "(+5.50)",
-             maxLoserName: 'Company Net',
-             maxLoserValue: 20.50,
-             maxLoserChange: "+1.50",
-             maxLoserChangePercent: "(+5.50)",
-        
+(function (stockWatcher, $) {
+  stockWatcher.portFolio = function portFolio(data) {
+    var self = this;
+    self.userName = ko.observable('Guest');
+    self.showToday = ko.observable(true);
+    self.changePortfolioType = function () {
+      self.showToday(!self.showToday());
+    };
+    self.todayDetails = ko.observable({
+      totalValue: "877,234",
+      totalChange: "+10000",
+      changePercent: "(+15.0%)",
+      valueInc: true,
+      maxGainerName: 'Company Name',
+      maxGainerValue: 30.50,
+      maxGainerChange: "+5.50",
+      maxGainerChangePercent: "(+5.50)",
+      maxLoserName: 'Company Name',
+      maxLoserValue: 30.50,
+      maxLoserChange: "+5.50",
+      maxLoserChangePercent: "(+5.50)"
+    });
+    self.totalDetails = ko.observable({
+      totalValue: "800,000",
+      totalChange: "+1000",
+      changePercent: "(+10.0%)",
+      valueInc: true,
+      maxGainerName: 'Company Net',
+      maxGainerValue: 50.50,
+      maxGainerChange: "+2.50",
+      maxGainerChangePercent: "(+5.50)",
+      maxLoserName: 'Company Net',
+      maxLoserValue: 20.50,
+      maxLoserChange: "+1.50",
+      maxLoserChangePercent: "(+5.50)",
+    });
+    self.portFolioDetails = ko.computed(function () {
+      return self.showToday() ?
+          {
+            linkName: 'Today',
+            linkValue: self.todayDetails
+          } :
+          {
+            linkName: 'OverAll',
+            linkValue: self.totalDetails
+          };
+    });
+    self.availableProfiles = ko.observableArray([
+      {
+        id: 1,
+        name: 'test'
+      },
+      {
+        id: 2,
+        name: 'test2'
+      }
+    ]);
+    self.selectedProfile = ko.observable();
+    self.availableRefreshRates = ko.observableArray([
+      {
+        id: 1,
+        name: '2 minutes'
+      },
+      {
+        id: 2,
+        name: '5 minutes'
+      }
+    ]);
+    self.selectedRefreshRate = ko.observable();
+    self.tableRows = ko.observableArray([
+      {
+        companyName: 'NAME1',
+        invPrice: 20,
+        quantity: 100,
+        invAmount: 5000,
+        livePrice: 60,
+        todayChange: 10,
+        todayGain: 50,
+        todayPercentage: '2%',
+        totalChange: 10,
+        totalGain: 50,
+        totalPercentage: '2%',
+        profileId: 1
+      },
+      {
+        companyName: 'NAME2',
+        invPrice: 20,
+        quantity: 100,
+        invAmount: 5000,
+        livePrice: 60,
+        todayChange: 10,
+        todayGain: 50,
+        todayPercentage: '2%',
+        totalChange: 10,
+        totalGain: 50,
+        totalPercentage: '2%',
+        profileId: 2
+      }
+    ]);
+    self.availableRows = ko.computed(function () {
+      if (self.selectedProfile()) {
+        return ko.utils.arrayFilter(self.tableRows() || [], function (row) {
+          return row.profileId === self.selectedProfile().id;
         });
-        self.portFolioDetails = ko.computed(function(){
-            return self.showToday() ?
-                {
-                            linkName: 'Today',
-                            linkValue: self.todayDetails
-                } :
-                {
-                            linkName: 'OverAll',
-                            linkValue: self.totalDetails
-                }
-            })
-        self.availableProfiles = ko.observableArray([
-            {
-                id: 1,
-                name: 'test'
-            },
-            {
-                id:2,
-                name: 'test2'
+      }
+      return [];
+    });
+    self.addNewTransDetails = ko.observable(new Application.stockWatcher.transModals(self, {}));
+    self.transAdd = function (isAdd, rowData, event) {
+      if (isAdd === 1) {
+        self.addNewTransDetails(new Application.stockWatcher.transModals(self, rowData));
+      } else if (isAdd === 0) {
+        var result = Application.showAlert(
+          {
+            msg: "Do you want to delete this Company?",
+            buttons: {Yes: true, No: false },
+            focus: 1,
+            callBack: function (result) {
+              if (result) {
+                alert(JSON.stringify(rowData.companyName));
+                self.tableRows.remove(rowData);
+              }
             }
-        ]);
-        self.selectedProfile = ko.observable();
-        self.availableRefreshRates = ko.observableArray([
-            {
-                id: 1,
-                name: '2 minutes'
-            },
-            {
-                id:2,
-                name: '5 minutes'
-            }
-        ]);
-        
-        self.selectedRefreshRate = ko.observable();
-        
-        self.tableRows = ko.observableArray([
-            {
-                companyName: 'NAME1',
-                invPrice: 20,
-                quantity: 100,
-                invAmount: 5000,
-                
-                livePrice: 60,
-                
-                todayChange: 10,
-                todayGain: 50,
-                todayPercentage: '2%',
-                
-                totalChange: 10,
-                totalGain: 50,
-                totalPercentage: '2%',
-                
-                profileId: 1
-            },
-            {
-                companyName: 'NAME2',
-                invPrice: 20,
-                quantity: 100,
-                invAmount: 5000,
-                
-                livePrice: 60,
-                
-                todayChange: 10,
-                todayGain: 50,
-                todayPercentage: '2%',
-                
-                totalChange: 10,
-                totalGain: 50,
-                totalPercentage: '2%',
-                
-                profileId: 2
-            }
-            ]);
-        self.availableRows = ko.computed(function(){
-            if ( self.selectedProfile() ){
-                return ko.utils.arrayFilter(self.tableRows()||[], function(row){
-                    return row.profileId === self.selectedProfile().id;
-                })
-            }
-            return [];
-        });
-        self.transAction = function(isAdd, rowData, event){
-            if ( isAdd ){
-                alert('Add')
-            }
-            else{
-                var result = Application.showAlert(
-                    {   
-                        msg: "Do you want to delete this Company?",
-                        buttons: {Yes: true, No: false },
-                        focus: 1,
-                        callBack: function(result){
-                            if (result){
-                                alert(JSON.stringify(rowData.companyName));
-                                self.tableRows.remove(rowData);
-                            }
-                        }
-                    }
-                );
-            }
-        }
-       
-        self.availableQoutes = ko.observableArray([
-            
-        ])
-    }
+          }
+        );
+      }
+    };
+    self.availableQoutes = ko.observableArray([
+    ]);
+  };
 }(Application.namespace("Application.stockWatcher"), jQuery));
 
-var applyFormBindings = function(data, tab_id){
-    var model = new Application.stockWatcher.quoteDetails(data);
-    ko.applyBindings(model, $(tab_id)[0]);
+var applyFormBindings = function (data, tab_id) {
+  var model = new Application.stockWatcher.portFolio(data);
+  ko.applyBindings(model, $(tab_id)[0]);
 };
 </script>

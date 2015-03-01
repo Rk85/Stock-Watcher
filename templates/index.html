@@ -3,95 +3,94 @@
 
 {% block leftSidebar %}
 <div class="span1" style="background-color: red">
-	Test1
+  Test1
 </div>
-{% endblock leftSidebar %}	
+{% endblock leftSidebar %}  
 
 {% block rightSidebar %}
 <div class="span1" style="background-color: blue">
-	Test1
+  Test1
 </div>
-{% endblock rightSidebar %}	
+{% endblock rightSidebar %}  
 
 {% block centerTop %}
 <div class="row-fluid" style="padding-bottom:2%; padding-top:1%">
-	<form class="navbar-search pull-left">
-  		<input type="text" class="search-query" placeholder="Search">
-	</form>
-	<div class="dropdown pull-right">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <b class="caret"></b></a>
-		<ul class="dropdown-menu">
-			<li><a href="#">Sign In</a></li>
-			<li><a href="#">Settings</a></li>
-			<li class="divider"></li>
-			<li><a href="#">Sign Out</a></li>
-		</ul>
-	</div>
+  <form class="navbar-search pull-left">
+    <input type="text" class="search-query" placeholder="Search">
+  </form>
+  <div class="dropdown pull-right">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="#">Sign In</a></li>
+      <li><a href="#">Settings</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Sign Out</a></li>
+    </ul>
+  </div>
 </div>
 {% endblock centerTop %}
 
 {% block centerTabs %}
 <div class="navbar navbar-custom" style="background-color: yellow">
-	<div class="navbar-inner">
-		<div class="container">
-			<a class="brand" href="#">Project name</a>
-			<div class=nav-collapse">
-				<ul id="main-nav" class="nav">
-					<li class="active"><a href="#home">Home</a></li>
-					<li><a href="#/stock/invest">Investments</a></li>
-					<li><a href="#/stock/trans">Transaction</a></li>
-					<li><a href="#/stock/watch">Watchlist</a></li>	
-					<li><a href="#/stock/message">Messages</a></li>
-				</ul>
-			</div><!-- /.nav-collapse -->
-  		</div><!-- /.container -->
-	</div><!-- /navbar-inner -->
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">Project name</a>
+      <div class="nav-collapse">
+        <ul id="main-nav" class="nav">
+          <li class="active"><a href="#home">Home</a></li>
+          <li><a href="#/stock/invest">Investments</a></li>
+          <li><a href="#/stock/trans">Transaction</a></li>
+          <li><a href="#/stock/watch">Watchlist</a></li>  
+          <li><a href="#/stock/message">Messages</a></li>
+        </ul>
+      </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+  </div><!-- /navbar-inner -->
 </div><!-- /navbar -->
-{% endblock centerTabs %}	
+{% endblock centerTabs %}  
 
 {% block centerContent %}
 <div class="panel-group center-content" id="accordion">
-	<div class="panel panel-default">
-		<div class="panel-heading center-div-content">
-			<div id="tab_content">
-				Testing home
-			</div>
-		</div><!-- /panel-heading -->
-	</div><!-- /panel -->
+  <div class="panel panel-default">
+    <div class="panel-heading center-div-content">
+      <div id="tab_content">
+        Testing home
+      </div>
+    </div><!-- /panel-heading -->
+  </div><!-- /panel -->
 </div><!-- /panel-group -->
-
-{% endblock centerContent %}	
+{% endblock centerContent %}  
 
 {% block totalContent %}
-<div id="main">	
-	<div class="container-fluid">
-		<div class="row-fluid">
-			{{ self.leftSidebar() }}
-			<div class="span10" >
-				{{ self.centerTop() }}
-				<div class="row-fluid">
-					{{ self.centerTabs() }}
-					{{ self.centerContent() }}
-				</div>
-			</div>		
-			{{ self.rightSidebar() }}
-		</div><!-- /row-fluid -->
-	</div><!-- /container-fluid -->
+<div id="main">  
+  <div class="container-fluid">
+    <div class="row-fluid">
+      {{ self.leftSidebar() }}
+      <div class="span10" >
+        {{ self.centerTop() }}
+        <div class="row-fluid">
+          {{ self.centerTabs() }}
+          {{ self.centerContent() }}
+        </div>
+      </div>    
+      {{ self.rightSidebar() }}
+    </div><!-- /row-fluid -->
+  </div><!-- /container-fluid -->
 </div><!-- /main -->
 {% endblock totalContent %}
 
-{% block loader %}	
+{% block loader %}  
 <div id="loader">
-	<img id="loading-image" src="/static_files/img/ajax-loader.gif" > </img>
+  <img id="loading-image" src="/static_files/css/img/ajax-loader.gif" > </img>
 </div>
 {% endblock loader %}
 
-{% block footer %}	
+{% block footer %}  
 <div id="footer">
-	<p class="pull-left">
-		<strong>Developer Name : Radhakrishnan Raji ( RK )</strong><br>
-		<strong>Developer Git Profile : Rk85</strong><br>
-		<strong> Contact : </strong><a href="mailto:#">rachandkrishnan@gmail.com</a>
-	</p>
+  <p class="pull-left">
+    <strong>Developer Name : Radhakrishnan Raji ( RK )</strong><br>
+    <strong>Developer Git Profile : Rk85</strong><br>
+    <strong> Contact : </strong><a href="mailto:#">rachandkrishnan@gmail.com</a>
+  </p>
 </div>
 {% endblock footer %}

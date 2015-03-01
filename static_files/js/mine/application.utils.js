@@ -1,26 +1,29 @@
-(function(Application, $, undefined){
-    Application.showAlert = function(options){
-        var options = options || {};
-        var msg = '<p><strong>'+ options.msg || '' + '</strong></p>'
-        $.prompt(msg,{
-                        buttons: options.buttons || { Yes: true, No: false },
-						focus: options.focus || 1,
-						submit:function(e,v,m,f){ 
-				            if ( options.callBack){
-				                options.callBack(v);
-                            }		
-						},
-                        classes: {
-						  box: '',
-                          fade: '',
-                          prompt: '',
-                          close: '',
-                          title: '',
-                          message: '',
-                          buttons: '',
-                          button: 'btn',
-                          defaultButton: 'btn-primary'
-                        }
-				});
-    }
+(function (Application, $) {
+  Application.showAlert = function (options) {
+    var inpOptions = options || {};
+    var msg = '<p><strong>' + inpOptions.msg || ' ' + '</strong></p>';
+    $.prompt(msg, {
+      buttons: inpOptions.buttons || {
+        Yes: true,
+        No: false
+      },
+      focus: inpOptions.focus || 1,
+      submit: function (e, v, m, f) {
+        if (inpOptions.callBack) {
+          inpOptions.callBack(v);
+        }
+      },
+      classes: {
+        box: '',
+        fade: '',
+        prompt: '',
+        close: '',
+        title: '',
+        message: '',
+        buttons: '',
+        button: 'btn',
+        defaultButton: 'btn-primary'
+      }
+    });
+  };
 }(window.Application = window.Application || {}, jQuery));

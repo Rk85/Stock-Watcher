@@ -145,7 +145,7 @@ def get_stock_invest(symbol=None):
     if request.method == 'GET':
         if not symbol:
             response_data = {
-                'form': render_template('get_invest.html'),
+                'form': render_template('views/get_invest.html'),
                 'response_data': {}
             }
             resp = make_response(jsonify(response_data), 200)

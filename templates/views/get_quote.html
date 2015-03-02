@@ -1,0 +1,171 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<h3 class="text-center"> Stock Details </h3>
+	</div>
+	<div class="row-fluid">
+		<div class="span5 stock-ticker" data-bind="visible: !showDetails()"> 
+			<form>
+	            <span>Stock Ticker</span>
+       	        <input class="typeahead" data-bind="value: selectedSymbol, valueUpdate: 'afterkeydown'" placeholder="stock ticker" type="search">
+				<a class="btn btn-small" data-bind="visible: enableGetQuotes, click: getChartDetails"> Get Quotes </a>
+			</form>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="stock-ticker"> 
+			<div class="span6" data-bind="visible: showDetails()" >
+				<h5> Trade Details </h5>
+   	            <table width=100% id="company_details_table" class="display table table-striped table-bordered table-hover table-condensed">
+                    <tbody data-bind="with: companyDetails">
+                   	    <tr><td>Company Name</td>
+                       	    <td data-bind="text:name"></td>
+						</tr>
+                   	    <tr><td>Stock Ticker</td>
+                       	    <td data-bind="text:symbol"></td>
+						</tr>
+                   	    <tr><td>Change</td>
+                       	    <td data-bind="text:change"></td>
+						</tr>
+                   	    <tr><td>Average Volume</td>
+                       	    <td data-bind="text:averageDailyVolume"></td>
+						</tr>
+                   	    <tr><td>Day's High</td>
+                       	    <td data-bind="text:daysHigh"></td>
+						</tr>
+                   	    <tr><td>Day's Low</td>
+                       	    <td data-bind="text:daysLow"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+			<div class="span6" data-bind="visible: showDetails()">
+				<div id="chart"></div>
+				<a class="btn button-reset pull-right" data-bind="click:resetZoom"> Reset Zoom </a>
+			</div>
+        </div>
+	</div>
+</div>
+<script>
+
+(function(stockWatcher, $, undefined){
+    stockWatcher.quoteDetails = function quoteDetails(data){
+        var self = this;
+		self.companyDetails = ko.observable();
+		self.showDetails = ko.observable(false);
+        self.selectedSymbol = ko.observable();
+		self.enableGetQuotes = ko.computed(function(){
+			return self.selectedSymbol();
+		});
+		self.substringMatcher = function(items) {
+			return function findMatches(q, cb) {
+				var matches, substrRegex;
+				matches = [];
+				substrRegex = new RegExp("^"+q, 'i');
+				$.each(items, function(i, item) {
+					if (substrRegex.test(item.symbol)) {
+						matches.push({ companyName: item.companyName,
+										symbol: item.symbol
+									 });
+					}
+				});
+				cb(matches);
+			};
+		}; 
+		self.allCompanies = ko.observableArray($.map(data.company_details||[], function(item){
+             return {
+                companyName: item.company_name,
+                symbol: item.symbol
+             };
+        }));
+		self.init = function init(){
+			$('typeahead').typeahead({
+					hint: true,
+					highlight: true,
+					minLength: 1
+				},
+				{
+					name: 'companies',
+					displayKey: 'symbol',
+					source: self.substringMatcher(self.allCompanies()),
+					templates: {
+						suggestion: function(item){return item.symbol}
+					}
+				});
+		}
+		self.closePrice = ko.observableArray([]);
+		self.volume = ko.observableArray([]);
+		self.getChartDetails = function getChartDetails(symbol){
+			$.ajax({
+				type: 'GET',
+				url: '/stock/quote/' + self.selectedSymbol(),
+				success: function(response){
+                    var responseData = response.response_data || {};
+                    var quoteDetails = responseData.quote_details || {};
+					self.closePrice(quoteDetails.close_price_details || [[]]);
+					self.volume(quoteDetails.volume_details || [[]]);
+                    var tradeDetails = responseData.trade_details || {};
+					self.companyDetails({
+						name: tradeDetails.Name,
+						averageDailyVolume: tradeDetails.AverageDailyVolume,
+						daysLow: tradeDetails.DaysLow,
+						daysHigh: tradeDetails.DaysHigh,
+						symbol: tradeDetails.symbol,
+						change: tradeDetails.Change
+					})
+					self.showDetails(true);
+					self.drawGraph();
+				}
+			}).fail(function(){
+				$.prompt("Unknown Error at server side");
+			});
+		}
+		self.drawGraph = function drawGraph(){
+			self.plot1 = jQuery.jqplot ('chart', [self.closePrice(), self.volume()], 
+                   { 
+					title:self.companyDetails() ? self.companyDetails().name : 'Test', 
+					axes: {
+       					xaxis: {
+					        label: "Date",
+							renderer:$.jqplot.DateAxisRenderer,
+							tickInterval: '4 months',
+				            tickOptions:{formatString:'%Y/%#m/%#d'} 
+				        },
+       					yaxis: {
+         						label: "Y Axis"
+				        }
+    				},
+					series: [
+								{
+							        lineWidth:2,
+                                    label: 'Close Price',
+						            markerOptions: { style:'dimaond' },
+                                    showDataLabels: true
+						          },
+						          {
+							        	lineWidth:2,
+                                        label: 'Volume',
+								        markerOptions: { style:"x" },
+                                        showDataLabels: true
+						          }
+					],
+					cursor:{
+        				show: true,
+					    zoom:true,
+					    showTooltip:true
+					} 
+            });
+		}
+		self.resetZoom = function resetZoom(){
+			$('#chart').empty();
+			self.drawGraph();
+		}
+    }
+}(Application.namespace("Application.stockWatcher"), jQuery));
+
+var applyFormBindings = function(data, tab_id){
+    var model = new Application.stockWatcher.quoteDetails(data);
+    ko.applyBindings(model, $(tab_id)[0]);
+    model.init();
+};
+</script>
+

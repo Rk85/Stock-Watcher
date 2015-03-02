@@ -10,7 +10,7 @@ from jinja2 import (
     TemplateNotFound
 )
 import os
-from url_routes import web_routes
+from views.url_routes import web_routes
 from flask import send_from_directory
 import logging
 from logging import config  # flake8: noqa needed for logging

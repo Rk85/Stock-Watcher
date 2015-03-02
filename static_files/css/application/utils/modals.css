@@ -44,3 +44,20 @@ div.jqi .jqimessage{
   width: 60%;
   left: 40%
 }
+
+.ui-datepicker-header
+{
+  background: #006699;
+  border: 1px solid #006699;
+}
+.ui-state-hover.ui-datepicker-prev-hover,
+.ui-state-hover.ui-datepicker-next-hover
+{
+    background: #006699;
+  border: 1px solid #006699;
+}
+.modal-header{
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+

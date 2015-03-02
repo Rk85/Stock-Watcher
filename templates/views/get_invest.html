@@ -1,4 +1,4 @@
-{% extends "get_invest_base.html" %}
+{% extends "views/get_invest_base.html" %}
 
 {% block portfolio_header %}
 <div class="row-fluid">
@@ -13,7 +13,7 @@
       <span class="portfolio-positive"><strong data-bind="text: totalChange"></strong> </span>
       <span class="portfolio-positive" data-bind="text: changePercent"></span>
       <span> <img data-bind="attr: {
-          src: valueInc ? '/static_files/img/up.gif' : '/static_files/img/down.gif', 
+          src: valueInc ? '/static_files/css/images/up.gif' : '/static_files/images/down.gif', 
           'height': '22', 'width': '22'
         }, css: 'img-circle'"></img>
       </span>
@@ -31,7 +31,7 @@
   <span class="portfolio-lower-positive"><strong data-bind="text: maxGainerChange"></strong></span>
     <span class="portfolio-lower-positive" data-bind="text: maxGainerChangePercent"></span>
     <span> <img data-bind="attr: {
-          src: '/static_files/img/up.gif',
+          src: '/static_files/css/images/up.gif',
           height:'20', width:'20'
         }, css: 'img-circle'"></img>
     </span>
@@ -48,7 +48,7 @@
     <span class="portfolio-lower-negative"><strong data-bind="text: maxLoserChange"></strong></span>
     <span class="portfolio-lower-negative" data-bind="text: maxLoserChangePercent"></span>
     <span> <img data-bind="attr: {
-          src: '/static_files/img/down.gif',
+          src: '/static_files/css/images/down.gif',
           height:'20', width:'20'
         }, css: 'img-circle'"></img>
     </span>

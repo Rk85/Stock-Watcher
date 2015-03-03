@@ -129,16 +129,21 @@ table.table.trans-table td{
   text-decoration: none;
   cursor: pointer;
   padding-bottom:5px;
+  text-align: center;
+  vertical-align: middle;
 }
-.company-share-details-column{
+.company-share-column{
   font: bold 12px/12px Arial;
   color: #000000;
   text-decoration: none;
-  cursor: pointer;
 }
 .company-action-column{
   cursor: pointer;
   background-color: #ffffff;
+}
+td.company-detail-share-column{
+  border: none;
+  padding-top: 4px;
 }
 .company-details-row td{
   border-top: none;
@@ -159,6 +164,5 @@ table.table.trans-table td{
   border-bottom-left-radius:2em;
   border-top: none;
   padding: 5px;
-  margin-bottom: 15px;
-  
+  margin-bottom: 15px; 
 }

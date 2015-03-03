@@ -49,7 +49,22 @@
       totalChange: 10,
       totalGain: 50,
       totalPercentage: '2%',
+      profileId: details.profile_id || 1,
+      transactionDetails: ko.observableArray([{
+        companyName: details.company_name,
+      invPrice: 20,
+      quantity: 100,
+      invAmount: 5000,
+      livePrice: 60,
+      todayChange: 10,
+      todayGain: 50,
+      todayPercentage: '2%',
+      totalChange: 10,
+      totalGain: 50,
+      totalPercentage: '2%',
       profileId: details.profile_id || 1
+      }]),
+      comapnyTransShow: ko.observable(false)
     }
   }
 
@@ -108,9 +123,10 @@
       }
       return [];
     });
-    self.addNewTransDetails = ko.observable({new Application.stockWatcher.transModals(self, {}))};
-    self.transAdd = function (isAdd, rowData, event) {
+    self.addNewTransDetails = ko.observable(new Application.stockWatcher.transModals(self, {}));
+    self.transAdd = function transAdd(isAdd, rowData, event) {
       if (isAdd === 1) {
+        alert('testadd')
         self.addNewTransDetails(new Application.stockWatcher.transModals(self, rowData));
       } else if (isAdd === 0) {
         var result = Application.showAlert(

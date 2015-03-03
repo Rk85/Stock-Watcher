@@ -60,7 +60,7 @@
 <div>
   <span data-bind="css: 'profile-details-text'"><strong data-bind="text: 'Profile'"></strong></span> 
   <select data-bind="options: availableProfiles, 
-	           optionsText: 'name', value: selectedProfile, 
+             optionsText: 'name', value: selectedProfile, 
              css: 'input-medium' ">
   </select>
   <div class="pull-right inline">
@@ -80,7 +80,7 @@
   <table class="table trans-table">
     <thead class="trans-table-head" >
       <tr>
-        <th class="trans-table-head-company"-><span>Company</span></th>
+        <th class="trans-table-head-company"><span>Company</span></th>
         <th><span>Quantity</span></th>
         <th><span>Invoice Amount</span></th>
         <th><span>Inv Price</span></th>
@@ -95,8 +95,13 @@
       </tr>
     </thead>
     <tbody  data-bind="foreach: availableRows">
-      {{ self.portfolio_company_row() }}
-      {{ self.portfolio_company_details_row() }}
+      {{ self.portfolio_total_trans_row() }}
+      <!-- ko if: comapnyTransShow -->
+        <!-- ko foreach: transactionDetails -->
+          {{ self.portfolio_detail_trans_row() }}
+        <!-- /ko -->
+      <!-- /ko -->
+        {{ self.portfolio_company_other_details() }}
     </tbody>
   </table>
 </div>
@@ -104,24 +109,61 @@
 </div>
 {% endblock portfolio_trans %} 
 
-{% block portfolio_company_row %}
+{% block portfolio_total_trans_row %}
 <tr>
-  <td>
+  <td data-bind="attr:{
+                  'rowspan': comapnyTransShow() ? transactionDetails().length+1 : 1}">
     <a data-bind="css: 'company-name-column', text: companyName,
-      attr: { 'data-toggle':'collapse', 'data-target': '#'+companyName}">
+                  click: function(data, event) { 
+                    comapnyTransShow(!comapnyTransShow())
+                  },
+                  attr:{
+                    'data-toggle': 'collapse',
+                    'data-target': '#otherDetails' + companyName
+                  }">
     </a>
   </td>
-  <td class="company-share-details-column"><span data-bind="text: quantity"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: invAmount"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: invPrice"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: livePrice"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: todayChange"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: todayGain"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: todayPercentage"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: totalChange"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: totalGain"></span></td>
-  <td class="company-share-details-column"><span data-bind="text: totalPercentage"></span></td>
+  <td class="company-share-column"><span data-bind="text: quantity"></span></td>
+  <td class="company-share-column"><span data-bind="text: invAmount"></span></td>
+  <td class="company-share-column"><span data-bind="text: invPrice"></span></td>
+  <td class="company-share-column"><span data-bind="text: livePrice"></span></td>
+  <td class="company-share-column"><span data-bind="text: todayChange"></span></td>
+  <td class="company-share-column"><span data-bind="text: todayGain"></span></td>
+  <td class="company-share-column"><span data-bind="text: todayPercentage"></span></td>
+  <td class="company-share-column"><span data-bind="text: totalChange"></span></td>
+  <td class="company-share-column"><span data-bind="text: totalGain"></span></td>
+  <td class="company-share-column"><span data-bind="text: totalPercentage"></span></td>
   <td>
+    <i data-bind="click: function(data, event) { 
+                    $parent.transAdd(0, data, event)
+                  },
+                  css: 'icon-remove-sign, company-action-column'">
+    </i>&nbsp;&nbsp;&nbsp;&nbsp;
+    <i data-bind="click: function(data, event) { 
+                    $parent.transAdd(1, data, event)
+                  },
+                  attr: { 
+                    'data-toggle':'modal',
+                    'data-target':'#transAddModal'
+                  },  css: 'icon-plus-sign, company-action-column'">
+    </i>&nbsp;&nbsp;&nbsp;&nbsp;
+  </td>
+</tr>
+{% endblock portfolio_total_trans_row %}
+
+{% block portfolio_detail_trans_row %}
+<tr>
+  <td class="company-detail-share-column"><span data-bind="text: quantity"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: invAmount"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: invPrice"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: livePrice"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: todayChange"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: todayGain"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: todayPercentage"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: totalChange"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: totalGain"></span></td>
+  <td class="company-detail-share-column"><span data-bind="text: totalPercentage"></span></td>
+  <td class="company-detail-share-column">
     <i data-bind="click: function(data, event) { 
             $root.transAdd(0, data, event)},
             css: 'icon-remove-sign, company-action-column'"></i>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -134,16 +176,18 @@
     </i>&nbsp;&nbsp;&nbsp;&nbsp;
   </td>
 </tr>
-{% endblock portfolio_company_row %}
+{% endblock portfolio_detail_trans_row %}
 
-{% block portfolio_company_details_row %}
+{% block portfolio_company_other_details %}
 <tr class="company-details-row">
-  <td colspan="12"> {{ self.portfolio_company_details() }}</td>
+  <td colspan="12"> 
+    <div class="collapse" data-bind="attr: {'id': 'otherDetails' + companyName}">
+      Testing
+    </div>
+  </td>
 </tr>
-{% endblock portfolio_company_details_row %}
+{% endblock portfolio_company_other_details %}
 
-{% block portfolio_company_details %}
-<div class="collapse company-details-div" data-bind="attr: {'id': companyName}">
-  Testing
-</div>
-{% endblock portfolio_company_details %}
+
+
+

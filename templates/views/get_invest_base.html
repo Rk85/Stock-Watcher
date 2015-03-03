@@ -19,53 +19,76 @@
 
 (function (stockWatcher, $) {
 
-  var totalDetails = function totalDetails(details) {
+  var formatTotalDetails = function formatTotalDetails(details) {
     return {
-      totalValue: "877,234",
-      totalChange: "+10000",
-      changePercent: "(+15.0%)",
-      valueInc: true,
-      maxGainerName: 'Company Name',
-      maxGainerValue: 30.50,
-      maxGainerChange: "+5.50",
-      maxGainerChangePercent: "(+5.50)",
-      maxLoserName: 'Company Name',
-      maxLoserValue: 30.50,
-      maxLoserChange: "+5.50",
-      maxLoserChangePercent: "(+5.50)"
+      totalValue: details.total_value || "877,234",
+      totalChange: details.total_change || "+10000",
+      changePercent: details.change_percent || "(+15.0%)",
+      valueInc: details.value_inc || true,
+      maxGainerName: details.max_gainer_name || 'Company Name',
+      maxGainerValue: details.max_gainer_value || 30.50,
+      maxGainerChange: details.max_gainer_change || "+5.50",
+      maxGainerChangePercent: details.max_gainer_percent || "(+5.50)",
+      maxLoserName: details.max_loser_name || 'Company Name',
+      maxLoserValue: details.max_loser_value || 30.50,
+      maxLoserChange: details.max_loser_change || "+5.50",
+      maxLoserChangePercent: details.max_loser_percent || "(+5.50)"
     }
   };
 
-  var profileCompanyRows = function profileCompanyRows(details){
-    return {
-      companyName: details.company_name,
-      invPrice: 20,
-      quantity: 100,
-      invAmount: 5000,
-      livePrice: 60,
-      todayChange: 10,
-      todayGain: 50,
-      todayPercentage: '2%',
-      totalChange: 10,
-      totalGain: 50,
-      totalPercentage: '2%',
-      profileId: details.profile_id || 1,
-      transactionDetails: ko.observableArray([{
-        companyName: details.company_name,
-      invPrice: 20,
-      quantity: 100,
-      invAmount: 5000,
-      livePrice: 60,
-      todayChange: 10,
-      todayGain: 50,
-      todayPercentage: '2%',
-      totalChange: 10,
-      totalGain: 50,
-      totalPercentage: '2%',
-      profileId: details.profile_id || 1
-      }]),
-      comapnyTransShow: ko.observable(false)
-    }
+  var profileCompanyDetails = function profileCompanyRows(data, parent){
+      var self = this;
+      self.data = data || {};
+      self.formatDetails = function formatDetails(details){
+        return {
+                companyName: details.company_name || 'Company Name',
+                invPrice: details.inv_price || 20,
+                quantity: details.quantity || 100,
+                invTotalAmount: details.inv_total_amount || 5000,
+                livePrice: details.live_price || 60,
+                todayChange: details.today_change || 10,
+                todayGain: details.today_gain || 50,
+                todayPercentage: details.today_percentage || '2%',
+                totalChange: details.total_change || 10,
+                totalGain: details.total_gain || 50,
+                totalPercentage: details.total_percent || '2%',
+                companyId: details.id || '',
+                comments: details.comments || '',
+                invDate: details.inv_date || '03/03/2014'
+        }
+      };
+      self.profileId =  self.data.profile_id || 1,
+      self.companyId = self.data.id;
+      self.transactionTotal = ko.observable(self.formatDetails(self.data));
+      self.transactionDetails = ko.observableArray(
+        ko.utils.arrayForEach(self.data.transaction_details || [],  function(transaction){
+          return self.formatDetails(transaction);
+        })  || []
+      );
+      // Sample insert to verify the UI
+      self.transactionDetails.push(self.formatDetails({}));
+      self.transactionDetails.push(self.formatDetails({}));
+      self.transactionDetails.push(self.formatDetails({}));
+      self.companyTransShow = ko.observable(false);
+      self.transactionAction = function transactionAction(actionId, rowData, event) {
+        if (actionId === 1) {
+          alert('Add Transaction')
+          var newTransData = {companyName: self.transactionTotal().companyName};
+          parent.transModalDetails(new stockWatcher.transModals(newTransData, parent));
+        } else if (actionId === 2){
+          alert('Edit Transaction')
+          parent.transModalDetails(new stockWatcher.transModals(rowData, parent));
+        } else if (actionId === 0) {
+          var result = Application.showAlert({
+              msg: "Do you want to delete this Transaction?",
+              callBack: function (result) {
+                if (result) {
+                  self.transactionDetails.remove(rowData);
+                }
+              }
+          });
+        }
+      };
   }
 
   stockWatcher.portFolio = function portFolio(data) {
@@ -75,8 +98,8 @@
     self.changePortfolioType = function () {
       self.showToday(!self.showToday());
     };
-    self.todayDetails = ko.observable(new totalDetails({}));
-    self.totalDetails = ko.observable(new totalDetails({}));
+    self.todayDetails = ko.observable(formatTotalDetails({}));
+    self.totalDetails = ko.observable(formatTotalDetails({}));
     self.portFolioDetails = ko.computed(function () {
       return self.showToday() ?
           {
@@ -98,7 +121,7 @@
         name: 'test2'
       }
     ]);
-    self.selectedProfile = ko.observable();
+    self.selectedProfile = ko.observable(self.availableProfiles()[0]);
     self.availableRefreshRates = ko.observableArray([
       {
         id: 1,
@@ -110,40 +133,41 @@
       }
     ]);
     self.selectedRefreshRate = ko.observable();
-    self.totalTableRows = ko.observableArray([
-      new profileCompanyRows({company_name: "NAME1", profile_id: 1}),
-      new profileCompanyRows({company_name: "NAME3", profile_id: 1}),
-      new profileCompanyRows({company_name: "NAME2", profile_id: 2})
+    self.totalProfileTableRows = ko.observableArray([
+      new profileCompanyDetails({id: 1, company_name: "NAME1", profile_id: 1}, self),
+      new profileCompanyDetails({id: 2, company_name: "NAME3", profile_id: 1}, self),
+      new profileCompanyDetails({id: 3, company_name: "NAME2", profile_id: 2}, self)
     ]);
-    self.availableRows = ko.computed(function () {
+    self.selectedProfileRows = ko.computed(function () {
       if (self.selectedProfile()) {
-        return ko.utils.arrayFilter(self.totalTableRows() || [], function (row) {
+        return ko.utils.arrayFilter(self.totalProfileTableRows() || [], function (row) {
           return row.profileId === self.selectedProfile().id;
         });
       }
       return [];
     });
-    self.addNewTransDetails = ko.observable(new Application.stockWatcher.transModals(self, {}));
-    self.transAdd = function transAdd(isAdd, rowData, event) {
-      if (isAdd === 1) {
-        alert('testadd')
-        self.addNewTransDetails(new Application.stockWatcher.transModals(self, rowData));
-      } else if (isAdd === 0) {
-        var result = Application.showAlert(
-          {
-            msg: "Do you want to delete this Company?",
-            callBack: function (result) {
-              if (result) {
-                self.totalTableRows.remove(rowData);
-              }
-            }
-          }
-        );
-      }
-    };
     self.availableQoutes = ko.observableArray([
     ]);
-  };
+    self.transModalDetails = ko.observable(new stockWatcher.transModals({}, self));
+    self.companyAction = function companyAction(actionId, rowData, event) {
+        if (actionId === 1) {
+          alert('Add New Company')
+        } else if (actionId === 0) {
+          var result = Application.showAlert({
+              msg: "Do you want to delete this Company?",
+              callBack: function (result) {
+                if (result) {
+                  self.totalProfileTableRows.remove(
+                    ko.utils.arrayFirst(self.totalProfileTableRows() || [], function(profileRow){
+                      return profileRow.companyId === rowData.companyId;
+                    })
+                  )
+              }
+            }
+          });
+        }
+    };
+  }
 }(Application.namespace("Application.stockWatcher"), jQuery));
 
 var applyFormBindings = function (data, tab_id) {

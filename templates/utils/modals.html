@@ -1,4 +1,4 @@
-<div id="transAddModal" class="modal hide fade tansAddModal" data-bind="with: $root.addNewTransDetails">
+<div id="transAddModal" class="modal hide fade tansAddModal" data-bind="with: $root.transModalDetails">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="myModalLabel" data-bind="text:headerName"></h3>
@@ -11,7 +11,7 @@
           <th><span class="modal-header">Price</span></th>
           <th><span class="modal-header">Date</span></th>
           <th><span class="modal-header">Shares</span></th>
-          <th><span class="modal-header">Details</span></th>
+          <th><span class="modal-header">Comments</span></th>
           <th><span><i data-bind="css: 'icon-plus-sign, company-action-column'"></i></span></th>
         </tr>
       </thead>
@@ -21,7 +21,7 @@
           <td><input data-bind="value:sharePrice" type="text" class="input-mini"/></td>
           <td><input data-bind="attr:{ id: datePickerId}, value:date" type="text" class="input-small"/></td>
           <td><input data-bind="value:totalShares" type="text" class="input-mini"/></td>
-          <td><input data-bind="value:details" type="text" class="input-medium"/></td>
+          <td><input data-bind="value:comments" type="text" class="input-medium"/></td>
           <td><i data-bind="css: 'icon-remove-sign, company-action-column'"></i>
           </td>
         </tr>
@@ -35,15 +35,15 @@
 </div>
 <script>
 (function (stockWatcher, $) {
-  stockWatcher.transModals = function transModals(parent, data) {
+  stockWatcher.transModals = function transModals(data, parent) {
     var self = this;
     self.datePickerId = ko.observable("date-picker");
     self.headerName = ko.observable(data.headerName || 'Add New Transaction');
     self.companyName = ko.observable(data.companyName || '');
-    self.sharePrice = ko.observable(data.sharePrice || 0);
-    self.date = ko.observable(data.date || '');
-    self.totalShares = ko.observable(data.totalShares || 0);
-    self.details = ko.observable(data.details || 0);
+    self.sharePrice = ko.observable(data.invPrice || '');
+    self.date = ko.observable(data.invDate || '');
+    self.totalShares = ko.observable(data.quantity || '');
+    self.comments = ko.observable(data.comments || '');
     self.saveAction = function saveAction() {
       alert(self.date());
     }

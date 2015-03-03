@@ -93,6 +93,7 @@
   border-top-left-radius:2em;
   border-top-right-radius:2em;
   padding: 5px;
+  margin-left: -1px;
 }
 .trans-table-div{
   margin-right: -2px;
@@ -102,9 +103,10 @@
   border: 1px double #006699;
   border-bottom: none;
   padding: 0px;
-  margin: -1px;
+  margin: -2px;
   background: #ffffff;
   table-layout:fixed;
+  border-collapse: separate;
 }
 
 .trans-table-head{
@@ -123,34 +125,65 @@
 table.table.trans-table td{
   padding: 6px;
 }
-.company-name-column{
+.company-name-column td{
+  text-align:left;
+}
+.company-name-name-link {
   font: bold 12px/12px Arial;
   color: #1e5695;
   text-decoration: none;
   cursor: pointer;
   padding-bottom:5px;
-  text-align: center;
-  vertical-align: middle;
+  
 }
-.company-share-column{
+td.company-share-column{
   font: bold 12px/12px Arial;
   color: #000000;
   text-decoration: none;
+  text-align:center;
+  vertical-align: middle;
 }
 .company-action-column{
   cursor: pointer;
   background-color: #ffffff;
 }
-td.company-detail-share-column{
-  border: none;
-  padding-top: 4px;
+.company-detail-share-top-left{
+  border-top-left-radius:2em;
 }
-.company-details-row td{
-  border-top: none;
-  border-bottom: 1px double #006699;
+.company-detail-share-top-right{
+  border-top-right-radius:2em;
+}
+.company-detail-share-row td:first-child{
+  border-left: 1px double #006699;
+}
+.company-detail-share-row td:last-child{
   border-right: 1px double #006699;
 }
-.company-details-div{
+td.company-detail-share-column{
+  border-top: 1px double #006699;
+  font: bold 12px/12px Arial;
+  color: #000000;
+  text-decoration: none;
+  text-align:center;
+  vertical-align: middle;
+}
+td.company-detail-share-column:first-child {
+  text-align:left;
+}
+.company-detail-share-bottom-left{
+  border-bottom-left-radius:2em;
+}
+.company-detail-share-bottom-right{
+  border-bottom-right-radius:2em;
+}
+.company-detail-share-last-row {
+  border-bottom: 1px double #006699;
+}
+.company-other-details-row td{
+  border-top: none;
+  border-bottom: 1px double #006699;
+}
+.company-other-details-div{
   padding-left: 5px;
 }
 .trans-table tr:last-child td{
@@ -164,5 +197,5 @@ td.company-detail-share-column{
   border-bottom-left-radius:2em;
   border-top: none;
   padding: 5px;
-  margin-bottom: 15px; 
+  margin-left: -1px; 
 }

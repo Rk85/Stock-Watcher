@@ -94,9 +94,9 @@
         <th><span></span></th>
       </tr>
     </thead>
-    <tbody  data-bind="foreach: availableRows">
+    <tbody  data-bind="foreach: selectedProfileRows">
       {{ self.portfolio_total_trans_row() }}
-      <!-- ko if: comapnyTransShow -->
+      <!-- ko if: companyTransShow -->
         <!-- ko foreach: transactionDetails -->
           {{ self.portfolio_detail_trans_row() }}
         <!-- /ko -->
@@ -110,12 +110,11 @@
 {% endblock portfolio_trans %} 
 
 {% block portfolio_total_trans_row %}
-<tr>
-  <td data-bind="attr:{
-                  'rowspan': comapnyTransShow() ? transactionDetails().length+1 : 1}">
-    <a data-bind="css: 'company-name-column', text: companyName,
+<tr data-bind="with: transactionTotal">
+  <td data-bind="css: 'company-name-column'">
+    <a data-bind="css: 'company-name-name-link', text: companyName,
                   click: function(data, event) { 
-                    comapnyTransShow(!comapnyTransShow())
+                    $parent.companyTransShow(!$parent.companyTransShow())
                   },
                   attr:{
                     'data-toggle': 'collapse',
@@ -124,7 +123,7 @@
     </a>
   </td>
   <td class="company-share-column"><span data-bind="text: quantity"></span></td>
-  <td class="company-share-column"><span data-bind="text: invAmount"></span></td>
+  <td class="company-share-column"><span data-bind="text: invTotalAmount"></span></td>
   <td class="company-share-column"><span data-bind="text: invPrice"></span></td>
   <td class="company-share-column"><span data-bind="text: livePrice"></span></td>
   <td class="company-share-column"><span data-bind="text: todayChange"></span></td>
@@ -133,14 +132,14 @@
   <td class="company-share-column"><span data-bind="text: totalChange"></span></td>
   <td class="company-share-column"><span data-bind="text: totalGain"></span></td>
   <td class="company-share-column"><span data-bind="text: totalPercentage"></span></td>
-  <td>
+  <td class="company-share-column">
     <i data-bind="click: function(data, event) { 
-                    $parent.transAdd(0, data, event)
+                    $root.companyAction(0, data, event)
                   },
                   css: 'icon-remove-sign, company-action-column'">
     </i>&nbsp;&nbsp;&nbsp;&nbsp;
     <i data-bind="click: function(data, event) { 
-                    $parent.transAdd(1, data, event)
+                    $parent.transactionAction(1, data, event)
                   },
                   attr: { 
                     'data-toggle':'modal',
@@ -152,37 +151,75 @@
 {% endblock portfolio_total_trans_row %}
 
 {% block portfolio_detail_trans_row %}
-<tr>
-  <td class="company-detail-share-column"><span data-bind="text: quantity"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: invAmount"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: invPrice"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: livePrice"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: todayChange"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: todayGain"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: todayPercentage"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: totalChange"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: totalGain"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: totalPercentage"></span></td>
-  <td class="company-detail-share-column">
+<tr class="company-detail-share-row">
+  <td data-bind="css: {
+                        'company-detail-share-top-left': $index() === 0,
+                        'company-detail-share-column': true,
+                        'company-detail-share-bottom-left company-detail-share-last-row': $index() === $parent.transactionDetails().length-1
+                      }"><span data-bind="text: invDate"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: quantity"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: invTotalAmount"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: invPrice"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: livePrice"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: todayChange"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: todayGain"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: todayPercentage"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: totalChange"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: totalGain"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-last-row': $index() === $parent.transactionDetails().length-1,
+                        'company-detail-share-column': true
+                      }"><span data-bind="text: totalPercentage"></span></td>
+  <td data-bind="css: {
+                        'company-detail-share-top-right': $index() === 0,
+                        'company-detail-share-column': true,
+                        'company-detail-share-bottom-right company-detail-share-last-row': $index() === $parent.transactionDetails().length-1
+                      }">
     <i data-bind="click: function(data, event) { 
-            $root.transAdd(0, data, event)},
+            $parent.transactionAction(0, data, event)},
             css: 'icon-remove-sign, company-action-column'"></i>&nbsp;&nbsp;&nbsp;&nbsp;
     <i data-bind="click: function(data, event) { 
-                    $root.transAdd(1, data, event)},
+                    $parent.transactionAction(2, data, event)},
                   attr: { 
                     'data-toggle':'modal',
                     'data-target':'#transAddModal'
-                  },  css: 'icon-plus-sign, company-action-column'">
+                  },  css: 'icon-edit, company-action-column'">
     </i>&nbsp;&nbsp;&nbsp;&nbsp;
   </td>
 </tr>
 {% endblock portfolio_detail_trans_row %}
 
 {% block portfolio_company_other_details %}
-<tr class="company-details-row">
+<tr class="company-other-details-row" data-bind="with: transactionTotal">
   <td colspan="12"> 
-    <div class="collapse" data-bind="attr: {'id': 'otherDetails' + companyName}">
-      Testing
+    <div class="collapse company-other-details-div" data-bind="attr: {'id': 'otherDetails' + companyName}">
     </div>
   </td>
 </tr>

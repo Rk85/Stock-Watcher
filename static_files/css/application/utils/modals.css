@@ -60,4 +60,8 @@ div.jqi .jqimessage{
   padding-left: 15px;
   padding-bottom: 10px;
 }
-
+.modal-table input, 
+.modal-table textarea
+{
+  margin-left: 10px;
+}

@@ -3,11 +3,13 @@
    at the top of the page
 */
 .portfolio{
+  position: relative;
   background: #D9EDF7 none repeat scroll 0 0;
   margin-top: 15px;
   margin-bottom: 8px;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px #888888;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 5px 5px 5px 0px #888888;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 .portfolio-header{
   border-bottom: 1px double #9cd77b;
@@ -89,11 +91,12 @@
   border: 1px double #006699;
 }
 .trans-table-head-append{
+  position: relative;
   background: #006699;
-  border-top-left-radius:2em;
-  border-top-right-radius:2em;
+  border-radius: 2em 2em 0px 0px;
   padding: 5px;
   margin-left: -1px;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 .trans-table-div{
   margin-right: -2px;
@@ -157,7 +160,7 @@ td.company-share-column{
   border-bottom-left-radius:2em;
 }
 .company-detail-share-bottom-right{
-  border-bottom-right-radius:2em;
+  border-bottom-right-radius:50em;
 }
 
 td.company-detail-share-column{
@@ -218,13 +221,17 @@ td.company-detail-share-last-row-last div{
   border-top: 1px double #006699;
   margin-top: -7px;
   margin-left: -7px;
-  margin-right: 17px;
+  margin-right: 25px;
 }
 .company-other-details-row td{
   border-top: none;
   border-bottom: 1px double #006699;
 }
 
+.company-other-details-last-row td{
+  border-top: none;
+  border-bottom: none;
+}
 .company-other-details-div{
   padding-left: 5px;
 }
@@ -234,10 +241,11 @@ td.company-detail-share-last-row-last div{
   margin: 0px;
 }
 .trans-table-tail-append{
+  position: relative;
   border: 1px double #006699;
-  border-bottom-right-radius:2em;
-  border-bottom-left-radius:2em;
+  border-radius: 0px 0px 2em 2em;
   border-top: none;
   padding: 5px;
   margin-left: -1px; 
+  behavior: url(/static_files/pie/PIE.htc);
 }

@@ -41,22 +41,28 @@
 	color: green;
 }
 
+.container {
+  background: #006699;
+  margin-right: -20px;
+}
 
 .navbar-custom {
   margin-bottom: 0px;
-  height: 30px;
+  height: 32px;
 }
 .navbar-custom .navbar-inner {
-  background: #006699; 
+  background: #006699;
   border:none;
   min-height: 30px;
   height: 40px;
   box-shadow: none;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 
 .navbar-custom .nav  li  a,
 .navbar-custom .nav  li  a:hover,
 .navbar-custom .brand {
+  background: #006699; 
   border-right: 1px solid #ffffff;
   box-shadow: none;
   color: #ffffff;
@@ -72,7 +78,7 @@
   border-right: 1px solid #ffffff;
   box-shadow: none;
   color: #ffffff;
-  height: 29px;
+  height: 31px;
   padding-bottom: 0px;
   padding-top: 6px;
   text-shadow: none;
@@ -90,4 +96,7 @@
   overflow-y: scroll;
   max-height: 100%;
   padding-bottom: 10%;
+}
+input.search-query{
+  behavior: url(/static_files/pie/PIE.htc);
 }

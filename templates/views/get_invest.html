@@ -101,9 +101,9 @@
           {{ self.portfolio_detail_trans_row() }}
         <!-- /ko -->
         <tr>
-          <td class="company-detail-share-last-row-first"><div>&nbsp;</div></td>
-          <td colspan="10" class="company-detail-share-last-row-other"></td>
-          <td class="company-detail-share-last-row-last"><div>&nbsp;</div></td>
+          <td class="company-detail-share-last-row-first"><div>test</div></td>
+          <td colspan="10" class="company-detail-share-last-row-other">test</td>
+          <td class="company-detail-share-last-row-last"><div>test</div></td>
         </tr>
       <!-- /ko -->
         {{ self.portfolio_company_other_details() }}
@@ -200,7 +200,10 @@
 {% endblock portfolio_detail_trans_row %}
 
 {% block portfolio_company_other_details %}
-<tr class="company-other-details-row" data-bind="with: transactionTotal">
+<tr data-bind= "css: {
+      'company-other-details-row': $index() != $root.selectedProfileRows().length-1,
+      'company-other-details-last-row': $index() === $root.selectedProfileRows().length-1
+      }, with: transactionTotal">
   <td colspan="12"> 
     <div class="collapse company-other-details-div" data-bind="attr: {'id': 'otherDetails' + companyName}">
     </div>

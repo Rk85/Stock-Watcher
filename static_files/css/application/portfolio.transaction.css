@@ -151,16 +151,20 @@ td.company-share-column{
   background-color: #ffffff;
 }
 .company-detail-share-top-left{
-  border-top-left-radius:2em;
+  border-radius:2em 0px 0px 0px;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 .company-detail-share-top-right{
-  border-top-right-radius:2em;
+  border-radius: 0px 2em 0px 0px;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 .company-detail-share-bottom-left{
-  border-bottom-left-radius:2em;
+  border-radius: 0px 0px 2em 0px;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 .company-detail-share-bottom-right{
-  border-bottom-right-radius:50em;
+  border-radius: 0px 0px 0px 2em;
+  behavior: url(/static_files/pie/PIE.htc);
 }
 
 td.company-detail-share-column{
@@ -187,10 +191,10 @@ tr.company-detail-share-row td.company-detail-share-column:first-child div{
   padding-top: 10px;
   padding-bottom: 10px;
 }
-tr.company-detail-share-row td.company-detail-share-column:last-child {
+td.company-detail-share-last-column {
   border: none;
 }
-tr.company-detail-share-row td.company-detail-share-column:last-child div{
+td.company-detail-share-last-column div{
   border-top: 1px double #006699;
   border-right: 1px double #006699;
   border-left: none;
@@ -202,24 +206,25 @@ tr.company-detail-share-row td.company-detail-share-column:last-child div{
   padding-top: 10px;
   padding-bottom: 8px;
 }
-td.company-detail-share-last-row-other {
-  border-top: 1px double #006699;
-}
 td.company-detail-share-last-row-first {
-  border-top: 1px double #ffffff;
-}
-td.company-detail-share-last-row-last {
-  border-top: 1px double #ffffff;
+  border-top: none; /* hide last row border */
 }
 td.company-detail-share-last-row-first div{
   border-top: 1px double #006699;
-  margin-top: -7px;
+  margin-top: -6px;
   margin-right: -7px;
   margin-left: 19px;
+  padding-top: 4px;
+}
+td.company-detail-share-last-row-other {
+  border-top: 1px double #006699;
+}
+td.company-detail-share-last-row-last {
+  border-top: none; /* hide last row border */
 }
 td.company-detail-share-last-row-last div{
   border-top: 1px double #006699;
-  margin-top: -7px;
+  margin-top: -6px;
   margin-left: -7px;
   margin-right: 25px;
 }
@@ -227,8 +232,7 @@ td.company-detail-share-last-row-last div{
   border-top: none;
   border-bottom: 1px double #006699;
 }
-
-.company-other-details-last-row td{
+.company-other-details-last-row td{ /* this is added to avoid last border in ie */
   border-top: none;
   border-bottom: none;
 }

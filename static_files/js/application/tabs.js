@@ -8,7 +8,7 @@
         success: function (data) {
           // Append the Ajax response as html data for the newly created Tab
           $(tab_content_selecter).html(data.form);
-          // Append the Ajax response as html data for the newly created Tab 
+          // Call the form binding of knockout 
           applyFormBindings(data.response_data, tab_content_selecter);
         }
       });

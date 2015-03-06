@@ -1,7 +1,8 @@
 /* These CSS class and details are used 
    to display the Today and OverAll details 
-   at the top of the page
+   at the top of the Investment page
 */
+/* Top Details - Total Investment */
 .portfolio{
   position: relative;
   background: #D9EDF7 none repeat scroll 0 0;
@@ -35,6 +36,7 @@
   font: 18px/18px Arial;
 }
 
+/* Lower 1 - Max Gainer, Max Loser Details */
 .portfolio-lower1{
   border-right: 1px double #9cd77b;
   padding: 10px;
@@ -42,7 +44,6 @@
 .portfolio-lower2{
   padding: 10px;
 }
-
 .portfolio-lower-company{
   font: bold 18px/18px Arial;
   color: #1e5695;
@@ -72,11 +73,11 @@
   cursor: pointer;
   color: #006699;
 }
-/* End of portfolio header css details */
+/* End of portfolio header/Lower css details */
 
 /* These CSS class and details are used 
-   to display the Porfolio trasaction details
-   of the ivestment page
+   to display the Porfolio trasaction table details
+   of the investment page
 */
 .trans-div{
   margin-top: 30px;
@@ -102,6 +103,7 @@
   margin-right: -2px;
   margin-left: 1px;
 }
+/* Portfolio Companies Total Investment Detail */
 .trans-table{
   border: 1px double #006699;
   border-bottom: none;
@@ -111,7 +113,6 @@
   table-layout:fixed;
   border-collapse: separate;
 }
-
 .trans-table-head{
   background: #006699;
   color: #ffffff;
@@ -150,23 +151,39 @@ td.company-share-column{
   cursor: pointer;
   background-color: #ffffff;
 }
+
+/* Detailed/Individual Transaction Details for the companies*/
 .company-detail-share-top-left{
   border-radius:2em 0px 0px 0px;
-  behavior: url(/static_files/pie/PIE.htc);
+  position: relative;
+  behavior: url(/static_files/pie/PIE.htc); 
 }
 .company-detail-share-top-right{
   border-radius: 0px 2em 0px 0px;
-  behavior: url(/static_files/pie/PIE.htc);
+  position: relative;
+  behavior: url(/static_files/pie/PIE.htc); 
+  
 }
 .company-detail-share-bottom-left{
-  border-radius: 0px 0px 2em 0px;
-  behavior: url(/static_files/pie/PIE.htc);
+  border-radius: 0px 0px 0px 2em;
+  position: relative;
+  behavior: url(/static_files/pie/PIE.htc); 
 }
 .company-detail-share-bottom-right{
-  border-radius: 0px 0px 0px 2em;
-  behavior: url(/static_files/pie/PIE.htc);
+  border-radius: 0px 0px 2em 0px;
+  position: relative;
+  behavior: url(/static_files/pie/PIE.htc); 
 }
-
+.company-detail-share-only-one-row-first {
+    border-radius: 2em 0em 0em 2em;
+    position: relative;
+    behavior: url(/static_files/pie/PIE.htc); 
+}
+.company-detail-share-only-one-row-last {
+    border-radius: 0em 2em 2em 0em;
+    position: relative;
+    behavior: url(/static_files/pie/PIE.htc); 
+}
 td.company-detail-share-column{
   border-top: 1px double #006699;
   font: bold 12px/12px Arial;
@@ -207,42 +224,41 @@ td.company-detail-share-last-column div{
   padding-bottom: 8px;
 }
 td.company-detail-share-last-row-first {
-  border-top: none; /* hide last row border */
+  border-top: none; 
 }
 td.company-detail-share-last-row-first div{
   border-top: 1px double #006699;
   margin-top: -6px;
   margin-right: -7px;
-  margin-left: 19px;
+  margin-left: 20px;
   padding-top: 4px;
 }
 td.company-detail-share-last-row-other {
   border-top: 1px double #006699;
 }
 td.company-detail-share-last-row-last {
-  border-top: none; /* hide last row border */
+  border-top: none; 
 }
 td.company-detail-share-last-row-last div{
   border-top: 1px double #006699;
   margin-top: -6px;
   margin-left: -7px;
-  margin-right: 25px;
+  margin-right: 17px;
 }
+
+/* Extra details for the company */
 .company-other-details-row td{
   border-top: none;
   border-bottom: 1px double #006699;
 }
-.company-other-details-last-row td{ /* this is added to avoid last border in ie */
+
+/* this is added to avoid last border in <= ie8*/
+.company-other-details-last-row td{ 
   border-top: none;
   border-bottom: none;
 }
 .company-other-details-div{
   padding-left: 5px;
-}
-.trans-table tr:last-child td{
-  border: none;
-  padding: 0px;
-  margin: 0px;
 }
 .trans-table-tail-append{
   position: relative;

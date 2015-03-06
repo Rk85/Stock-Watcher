@@ -12,7 +12,7 @@
       });
     },
     run: function () {
-        Application.Routing.Sammy.run("#main");
+      Application.Routing.Sammy.run("#main");
     }
   };
 }(window.Application = window.Application || {}, jQuery));

@@ -7,22 +7,48 @@
     <table class="table modal-table">
       <thead class="trans-table-head" >
         <tr>
-          <th class="trans-table-head-company"-><span>Company</span></th>
+          <th class="trans-table-head-company"><span>Company</span></th>
           <th><span class="modal-header">Inv Price</span></th>
           <th><span class="modal-header">Date</span></th>
           <th><span class="modal-header">Quantity</span></th>
           <th><span class="modal-header">Comments</span></th>
-          <th><span><i data-bind="css: 'icon-plus-sign, company-action-column'"></i></span></th>
+          <th data-bind="ifnot: isEdit">
+            <span>
+              <i data-bind="click: function(data, event) { 
+                    transDetails.push(newTransDetail(data))
+                  },
+                  css: 'icon-plus-sign, company-action-column'">
+              </i>
+            </span>
+          </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody data-bind="foreach: transDetails">
         <tr>
-          <td><a data-bind="text: companyName, css: 'company-name-column'"></a></td>
-          <td><input data-bind="value:sharePrice" type="text" class="input-mini"/></td>
-          <td><input data-bind="attr:{ id: datePickerId}, value:date" type="text" class="input-small"/></td>
-          <td><input data-bind="value:totalShares" type="text" class="input-mini"/></td>
+          <td class="'company-name-column'">
+            <a data-bind="text: companyName, css: 'company-name-name-link'"></a>
+          </td>
+          <td><input data-bind="value:invPrice" type="text" class="input-mini"/></td>
+          <td>
+            <input data-bind="attr:{ id: 'datepicker'+$index()}, 
+                              value:invDate,
+                              event: {
+                                 mousedown : function(){
+                                          $('#datepicker'+$index()).datepicker();
+                                          return true;
+                                        }
+                              }" 
+                  type="text" class="input-small"/>
+          </td>
+          <td><input data-bind="value:quantity" type="text" class="input-mini"/></td>
           <td><input data-bind="value:comments" type="text" class="input-medium"/></td>
-          <td><i data-bind="css: 'icon-remove-sign, company-action-column'"></i>
+          <td data-bind="ifnot: $parent.isEdit">
+            <span>
+              <i data-bind="click: function(data, event) { 
+                    $parent.transDetails.remove(data)
+                  }, css: 'icon-remove-sign, company-action-column'">
+              </i>
+            </span>
           </td>
         </tr>
       </tbody>
@@ -30,26 +56,32 @@
   </div>
   <div class="modal-footer">
     <button class="btn, modal-close-button" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button data-bind="css: 'btn modal-default-button', click: saveAction">Save changes</button>
+    <button data-dismiss="modal" data-bind="enable: transDetails().length > 0, css: 'btn modal-default-button', click: saveAction">Save changes</button>
   </div>
 </div>
 <script>
 (function (stockWatcher, $) {
   stockWatcher.transModals = function transModals(data, parent) {
     var self = this;
-    self.datePickerId = ko.observable("date-picker");
+    self.newTransDetail = function newTransDetail(details) {
+      return {
+        companyName: ko.observable(data.companyName || ''),
+        invPrice: ko.observable(details.invPrice || ''),
+        invDate: ko.observable(details.invDate || ''),
+        quantity: ko.observable(details.quantity || ''),
+        comments: ko.observable(details.comments || '')
+      };
+    };
     self.headerName = ko.observable(data.headerName || 'Add New Transaction');
-    self.companyName = ko.observable(data.companyName || '');
-    self.sharePrice = ko.observable(data.invPrice || '');
-    self.date = ko.observable(data.invDate || '');
-    self.totalShares = ko.observable(data.quantity || '');
-    self.comments = ko.observable(data.comments || '');
+    self.isEdit = ko.observable(data.isEdit || false);
+    self.transDetails = ko.observableArray([
+      self.newTransDetail(data)
+    ]);
     self.saveAction = function saveAction() {
-      alert(self.date());
-    }
-    $('#transAddModal').on('shown', function () {
-        $("#"+self.datePickerId()).datepicker()
-    });
+      if (data.onSave) {
+        data.onSave(self.transDetails());
+      }
+    };
   };
 }(Application.namespace("Application.stockWatcher"), jQuery));
 </script>

@@ -7,6 +7,10 @@
         {% block portfolio_max_loser %}{% endblock portfolio_max_loser %}
       </div>
     </div>
+    <div data-bind="visible: showToday" class="span6 portfolio-graph" id="portfolioGraph_today">
+    </div>
+    <div data-bind="visible: !showToday()" class="span6 portfolio-graph" id="portfolioGraph_total">
+    </div>
   </div>
   <div class="row-fluid trans-div">
     {% block profile_select_div %}{% endblock profile_select_div %}
@@ -65,19 +69,62 @@
     self.showToday = ko.observable(true);
     self.changePortfolioType = function () {
       self.showToday(!self.showToday());
+      if ( self.showToday()) {
+        self.drawChart("today");
+      }
+      else{
+        self.drawChart("total");
+      }
     };
+    self.todayDataPoints = ko.observableArray();
+    self.totalDataPoints = ko.observableArray();
+    self.drawChart = function (type){
+      if (type == "today") {
+        var options = {
+          graphArgs: {
+            title :{ text: "Today Net Profit"},      
+            data: [{ type: "line", xValueType: "dateTime"}],
+            axisX: { title: "chart updates every 3 secs"},
+            axisY:{ prefix: 'Rs', includeZero: false}, 
+          },
+          dataLength: 5,
+          updateInterval: 3000,
+          dataPoints: self.todayDataPoints
+        }
+        Application.graph.Init("portfolioGraph_today", options)
+      }
+      if (type == "total") {
+        var options = {
+          graphArgs: {
+            title :{ text: "OverAll Net Profit"},      
+            data: [{ type: "line", xValueType: "dateTime"}],
+            axisX: { title: "chart updates every 3 secs"},
+            axisY:{ prefix: 'Rs', includeZero: false}, 
+          },
+          dataLength: 5,
+          updateInterval: 3000,
+          dataPoints: self.totalDataPoints
+        }
+        Application.graph.Init("portfolioGraph_total", options)
+      }
+      
+    }
+    self.drawChart("today");
     self.todayDetails = ko.observable(Application.formats.portfolioTotalDetails({}));
     self.totalDetails = ko.observable(Application.formats.portfolioTotalDetails({}));
     self.portFolioDetails = ko.computed(function () {
-      return self.showToday() ?
-          {
+      if ( self.showToday() ){
+        return  {
             linkName: 'Today',
             linkValue: self.todayDetails
-          } :
-          {
+          };
+      }
+      else {
+        return {
             linkName: 'OverAll',
             linkValue: self.totalDetails
           };
+      }
     });
     self.availableProfiles = ko.observableArray([
       {

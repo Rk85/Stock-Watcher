@@ -75,6 +75,17 @@
 }
 /* End of portfolio header/Lower css details */
 
+/* portfolio graph details */
+.portfolio-graph{
+  position: relative;
+  background: #D9EDF7 none repeat scroll 0 0;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  height: 250px;
+}
+
+/* End of portfolio graph details */
+
 /* These CSS class and details are used 
    to display the Porfolio trasaction table details
    of the investment page

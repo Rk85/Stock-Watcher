@@ -1,6 +1,11 @@
 (function (Application, $) {
   var tab_content_selecter = "#tab_content";
   Application.Tab = {
+    initialize: function () {
+      $('body').tooltip({
+        selector: '[data-toggle*=tooltip]'
+      });
+    },
     GetContent: function (url) {
       // Send the Ajax Request for the newly created tab
       $.ajax({

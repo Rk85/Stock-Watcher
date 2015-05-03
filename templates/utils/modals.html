@@ -30,15 +30,8 @@
           </td>
           <td><input data-bind="value:invPrice" type="text" class="input-mini"/></td>
           <td>
-            <input data-bind="attr:{ id: 'datepicker'+$index()}, 
-                              value:invDate,
-                              event: {
-                                 mousedown : function(){
-                                          $('#datepicker'+$index()).datepicker();
-                                          return true;
-                                        }
-                              }" 
-                  type="text" class="input-small"/>
+            <input data-bind="enable: false, value:invDate, attr:{ id: 'datepicker'+$index()}"
+              type="text" class="input-small"></input>
           </td>
           <td><input data-bind="value:quantity" type="text" class="input-mini"/></td>
           <td><input data-bind="value:comments" type="text" class="input-medium"/></td>
@@ -82,6 +75,17 @@
         data.onSave(self.transDetails());
       }
     };
-  };
+    $('#transAddModal').on('show', function () {
+      var i = 0;
+        for(i=0; i<self.transDetails().length; i++){
+          $('#datepicker' + i).datepicker(
+            {
+              showOn: 'button',
+              buttonImage: 'static_files/css/images/calendar.gif',
+              buttonImageOnly: true
+          });
+        }
+    })
+  }  
 }(Application.namespace("Application.stockWatcher"), jQuery));
 </script>

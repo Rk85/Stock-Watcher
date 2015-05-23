@@ -1,0 +1,246 @@
+/* These CSS class and details are used 
+   to display the Today and OverAll details 
+   at the top of the Investment page
+*/
+/* Top Details - Total Investment */
+.portfolio{
+  background: #D9EDF7 none repeat scroll 0 0;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 5px 5px 5px 0px #888888;
+  behavior: url(/static_files/pie/PIE.htc);
+}
+.portfolio-header{
+  border-bottom: 1px double #9cd77b;
+  padding: 10px;
+}
+.portfolio-header-desc{
+  font: 15px/16px Arial;
+  color: #646464;
+  text-decoration: none;
+  padding-bottom: 5px;
+  margin: 0px;
+}
+.portfolio-header-value{
+  color: #444444;
+  font: bold 28px/28px Arial;
+}
+.portfolio-positive{
+  color: #53a503;
+  font: 18px/18px Arial;
+}
+.portfolio-negative{
+  color: #c20000;
+  font: 18px/18px Arial;
+}
+
+/* Lower 1 - Max Gainer, Max Loser Details */
+.portfolio-lower1{
+  border-right: 1px double #9cd77b;
+  padding: 10px;
+}
+.portfolio-lower2{
+  padding: 10px;
+}
+.portfolio-lower-company{
+  font: bold 18px/18px Arial;
+  color: #1e5695;
+  text-decoration: none;
+  padding-bottom: 5px;
+  margin: 0px;
+}
+.portfolio-lower-value{
+  color: #444444;
+  font: bold 20px/20px Arial;
+  padding: 0px;
+  margin: 0px;
+}
+.portfolio-lower-positive{
+  color: #53a503;
+  font: 16px/16px Arial;
+  padding: 0px;
+  margin: 0px;
+}
+.portfolio-lower-negative{
+  color: #c20000;
+  font: 16px/16px Arial;
+  padding: 0px;
+  margin: 0px;
+}
+.portfolio-change{
+  cursor: pointer;
+  color: #006699;
+}
+/* End of portfolio header/Lower css details */
+
+/* portfolio graph details */
+.portfolio-graph{
+  position: relative;
+  background: #D9EDF7 none repeat scroll 0 0;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  height: 250px;
+}
+
+/* End of portfolio graph details */
+
+/* These CSS class and details are used 
+   to display the Porfolio trasaction table details
+   of the investment page
+*/
+.trans-div{
+  margin-top: 30px;
+}
+.profile-details-text{
+  margin-left: 10px;
+}
+.profile-refresh-text{
+  margin-right: 10px;
+}
+.trans-div select{
+  border: 1px double #006699;
+}
+.trans-table-head-append{
+  position: relative;
+  background: #006699;
+  border-radius: 2em 2em 0px 0px;
+  padding: 5px;
+  margin-left: -1px;
+  behavior: url(/static_files/pie/PIE.htc);
+}
+.trans-table-div{
+  margin-right: -2px;
+  margin-left: 1px;
+}
+/* Portfolio Companies Total Investment Detail */
+.trans-table{
+  border: 1px double #006699;
+  border-bottom: none;
+  padding: 0px;
+  margin: -2px;
+  background: #ffffff;
+  table-layout:fixed;
+  border-collapse: separate;
+}
+.trans-table-head{
+  background: #006699;
+  color: #ffffff;
+  border: none;
+  word-wrap: break-word; 
+}
+.trans-table-head-company{
+  width: 150px;
+}
+.trans-table-head th span{
+  text-align: center;
+  margin: 0px;
+}
+table.table.trans-table td{
+  padding: 6px;
+}
+.company-name-column td{
+  text-align:left;
+}
+.company-name-name-link {
+  font: bold 12px/12px Arial;
+  color: #1e5695;
+  text-decoration: none;
+  cursor: pointer;
+  padding-bottom:5px;
+  
+}
+td.company-share-column{
+  font: bold 12px/12px Arial;
+  color: #000000;
+  text-decoration: none;
+  text-align:center;
+  vertical-align: middle;
+}
+.company-action-column{
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+/* Detailed/Individual Transaction Details for the companies*/
+td.company-detail-share-column{
+  border-top: 1px double #006699;
+  font: bold 12px/12px Arial;
+  color: #000000;
+  text-decoration: none;
+  text-align:left;
+  vertical-align: middle;
+}
+tr.company-detail-share-row td.company-detail-share-column:first-child {
+  text-align:left;
+  border: none;
+}
+tr.company-detail-share-row td.company-detail-share-column:first-child div{
+  border-top: 1px double #006699;
+  border-left: 1px double #006699;
+  border-right: none;
+  margin-top: -6px;
+  margin-bottom: -8px;
+  margin-right: -6px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+td.company-detail-share-last-column {
+  border: none;
+}
+td.company-detail-share-last-column div{
+  border-top: 1px double #006699;
+  border-right: 1px double #006699;
+  border-left: none;
+  margin-top: -6px;
+  margin-bottom: -7px;
+  margin-left: -6px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10px;
+  padding-bottom: 8px;
+}
+td.company-detail-share-last-row-first {
+  border-top: none; 
+}
+td.company-detail-share-last-row-first div{
+  border-top: 1px double #006699;
+  margin-top: -6px;
+  margin-right: -7px;
+  padding-top: 4px;
+}
+td.company-detail-share-last-row-other {
+  border-top: 1px double #006699;
+}
+td.company-detail-share-last-row-last {
+  border-top: none; 
+}
+td.company-detail-share-last-row-last div{
+  border-top: 1px double #006699;
+  margin-top: -6px;
+  margin-left: -7px;
+}
+
+/* Extra details for the company */
+.company-other-details-row td{
+  border-top: none;
+  border-bottom: 1px double #006699;
+}
+
+/* this is added to avoid last border in <= ie8*/
+.company-other-details-last-row td{ 
+  border-top: none;
+  border-bottom: none;
+}
+.company-other-details-div{
+  padding-left: 5px;
+}
+.trans-table-tail-append{
+  position: relative;
+  border: 1px double #006699;
+  border-radius: 0px 0px 2em 2em;
+  border-top: none;
+  padding: 5px;
+  margin-left: -1px; 
+  behavior: url(/static_files/pie/PIE.htc);
+}

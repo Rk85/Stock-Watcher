@@ -9,6 +9,10 @@
           var url = "/stock/invest";
           Application.Tab.GetContent(url);
         });
+        this.get("#/stock/trans", function (context) {
+          var url = "/stock/trans";
+          Application.Tab.GetContent(url);
+        });
       });
     },
     run: function () {

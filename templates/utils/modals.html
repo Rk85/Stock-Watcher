@@ -58,6 +58,7 @@
     var self = this;
     self.newTransDetail = function newTransDetail(details) {
       return {
+        id: data.id || '',
         companyName: ko.observable(data.companyName || ''),
         invPrice: ko.observable(details.invPrice || ''),
         invDate: ko.observable(details.invDate || ''),

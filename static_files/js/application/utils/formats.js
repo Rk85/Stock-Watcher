@@ -18,11 +18,12 @@
 
   formats.portfolioTransDetail = function formatProfileTransDetail(details) {
     return {
-      companyName: ko.utils.unwrapObservable(details.companyName) || 't',
-      invPrice: ko.utils.unwrapObservable(details.invPrice) || 't',
-      invDate: ko.utils.unwrapObservable(details.invDate) || 'test',
-      quantity: ko.utils.unwrapObservable(details.quantity) || 't',
-      comments: ko.utils.unwrapObservable(details.comments) || 't',
+      id: ko.utils.unwrapObservable(details.id) || '',
+      companyName: ko.utils.unwrapObservable(details.companyName) || '',
+      invPrice: ko.utils.unwrapObservable(details.invPrice) || '0',
+      invDate: ko.utils.unwrapObservable(details.invDate) || '',
+      quantity: ko.utils.unwrapObservable(details.quantity) || '0',
+      comments: ko.utils.unwrapObservable(details.comments) || '',
       invTotalAmount: ko.utils.unwrapObservable(details.invTotalAmount) || '0',
       livePrice: ko.utils.unwrapObservable(details.livePrice) || '0',
       todayChange: ko.utils.unwrapObservable(details.todayChange) || '0',

@@ -133,20 +133,30 @@ def get_quote(symbol=None):
 
 
 @web_routes.route('/invest', methods=['GET'])
-@web_routes.route('/quote/<string:symbol>', methods=['GET'])
-def get_stock_invest(symbol=None):
+def get_stock_invest():
     """
-        Description : View function to Handle the clients display requests
-
-        input_param : symbol - selected symbol
-        input_type : string
+        description : View function to Handle the clients display requests
 
     """
     if request.method == 'GET':
-        if not symbol:
-            response_data = {
-                'form': render_template('views/get_invest.html'),
-                'response_data': {}
-            }
-            resp = make_response(jsonify(response_data), 200)
-            return resp
+        response_data = {
+            'form': render_template('views/get_invest.html'),
+            'response_data': {}
+        }
+        resp = make_response(jsonify(response_data), 200)
+        return resp
+
+
+@web_routes.route('/trans', methods=['GET'])
+def get_trans_details():
+    """
+        description : View function to Handle the clients display requests
+
+    """
+    if request.method == 'GET':
+        response_data = {
+            'form': render_template('views/get_trans.html'),
+            'response_data': {}
+        }
+        resp = make_response(jsonify(response_data), 200)
+        return resp

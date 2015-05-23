@@ -1,0 +1,30 @@
+{% extends "views/get_trans_base.html" %}
+
+{% block transaction_history %}
+<div class="trans-history-table-head-append">
+</div>
+<div class="trans-history-table-div">
+  <table class="table trans-history-table">
+    <thead class="trans-history-table-head" >
+      <tr>
+        <th class="trans-history-table-head-company"><span>Company</span></th>
+        <th><span>Quantity</span></th>
+        <th><span>Buy date</span></th>
+        <th><span>Sell Date</span></th>
+        <th><span>Buy Price</span></th>
+        <th><span>Sell Price</span></th>
+        <th colspan="2"><span>Broker Amount</span></th>
+        <th><span>Total Gain</span></th>
+        <th><span>Total Gain %</span></th>
+        <th><span>Tax</span></th>
+        <th>Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<div class="trans-history-table-tail-append">
+</div>
+{% endblock transaction_history %}

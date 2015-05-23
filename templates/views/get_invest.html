@@ -101,7 +101,7 @@
                     'data-toggle':'tooltip',
                     'title':'Add New Company'
                   },
-                  css: 'icon-plus-sign'">
+                  css: 'icon-plus-sign, company-action-column'">
             </i>&nbsp;&nbsp;&nbsp;&nbsp;
           </span>
         </th>
@@ -184,6 +184,20 @@
   <td class="company-detail-share-column">
     <div>
       <span data-bind="text: invDate">
+      </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span>
+        <i data-bind="click: function(data, event) { 
+              $parent.transactionAction(Application.staticData.EDIT, data, event)
+              $('#transAddModal').modal();
+            },
+            attr: { 
+              'data-toggle':'tooltip',
+              'title':'Sell Transaction',
+              'data-placement': 'top'
+            },
+            css: 'icon-ok, company-action-column'">
+        </i>&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
     </div>
   </td>

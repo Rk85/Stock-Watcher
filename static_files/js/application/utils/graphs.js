@@ -27,10 +27,18 @@
       if (dataPoints().length > dataLength) {
         dataPoints().shift();
       }
-      chart.render();
+      var element = document.getElementById(divId);
+      if ( element ){
+        chart.render();
+      }
+      else {
+        clearInterval(update_id);
+      }
       $('.canvasjs-chart-credit').remove();
     };
     updateChart();
-    setInterval(function () {updateChart(); }, updateInterval);
+    var update_id = setInterval(function () {
+        updateChart(); 
+    }, updateInterval);
   };
 }(Application.namespace("Application.graph"), jQuery));

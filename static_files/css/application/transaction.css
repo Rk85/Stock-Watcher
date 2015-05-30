@@ -43,20 +43,39 @@
 table.table.trans-history-table td{
   padding: 6px;
 }
-.history-company-name-column td{
+td.history-company-name-column{
   text-align:left;
+  border-top: none;
+  border-bottom: 1px double #006699;
 }
 .history-company-name-name-link {
   font: bold 12px/12px Arial;
   color: #1e5695;
   text-decoration: none;
-  cursor: pointer;
   padding-bottom:5px;
   
+}
+td.history-trans-detail-column{
+  border-top: none;
+  border-bottom: 1px double #006699;
+  font: bold 12px/12px Arial;
+  color: #000000;
+  text-decoration: none;
+  text-align:left;
+  vertical-align: middle;
 }
 .history-company-action-column{
   cursor: pointer;
   background-color: #ffffff;
+}
+td.history-trans-detail-last-row {
+  border-top: none;
+  border-bottom: none; 
+  font: bold 12px/12px Arial;
+  color: #000000;
+  text-decoration: none;
+  text-align:left;
+  vertical-align: middle;
 }
 .trans-history-table-tail-append{
   position: relative;

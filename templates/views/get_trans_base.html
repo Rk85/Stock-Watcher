@@ -8,3 +8,10 @@
     </div>
   </div>
 </div>
+
+<script>
+var applyFormBindings = function (data, tab_id) {
+  var model = new Application.stockWatcher.transaction.history(data);
+  ko.applyBindings(model, $(tab_id)[0]);
+};
+</script>

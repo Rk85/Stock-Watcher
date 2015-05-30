@@ -13,7 +13,7 @@
         <th><span>Sell Date</span></th>
         <th><span>Buy Price</span></th>
         <th><span>Sell Price</span></th>
-        <th colspan="2"><span>Broker Amount</span></th>
+        <th><span>Comm Amt</span></th>
         <th><span>Total Gain</span></th>
         <th><span>Total Gain %</span></th>
         <th><span>Tax</span></th>
@@ -21,10 +21,77 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody data-bind="foreach: selectedProfileHistoryRows">
+        {{ self.portfolio_detail_trans_history_row() }}
     </tbody>
   </table>
 </div>
 <div class="trans-history-table-tail-append">
 </div>
 {% endblock transaction_history %}
+
+{% block portfolio_detail_trans_history_row %}
+<tr>
+  <td data-bind="css: {
+    'history-company-name-column': true,
+    'history-trans-detail-last-row': $index() == $root.totalRows()}">
+    <span data-bind="css: 'history-company-name-name-link', text: companyName">
+    </span>
+  </td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: quantity"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: buyDate"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: sallDate"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: buyPrice"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: sellPrice"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: brokerAmount"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: totalGain"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: totalGainPercent"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: tax"></span></td>
+  <td data-bind="css: {
+    'history-trans-detail-column': $index() < $root.totalRows(),
+    'history-trans-detail-last-row': $index() == $root.totalRows()}">
+    <div>
+      <span>
+        <i data-bind="click: function(data, event) { 
+                      $root.transactionAction(Application.staticData.EDIT, data, event);
+                    },
+                  attr: { 
+                    'data-toggle':'tooltip',
+                    'title':'Edit Transaction',
+                    'data-placement': 'top'
+                  },
+                  css: 'icon-edit, history-company-action-column'">
+        </i>&nbsp;&nbsp;&nbsp;&nbsp;
+        <i data-bind="click: function(data, event) { 
+              $root.transactionAction(Application.staticData.DEL, data, event)
+            },
+            attr: { 
+              'data-toggle':'tooltip',
+              'title':'Remove Transaction',
+              'data-placement': 'top'
+            },
+            css: 'icon-remove-sign, history-company-action-column'">
+        </i>&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+  </td>
+</tr>
+{% endblock portfolio_detail_trans_history_row %}

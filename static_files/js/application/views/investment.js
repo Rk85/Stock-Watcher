@@ -8,9 +8,9 @@
     self.transId = 1; // This will come from DB
     self.transactionTotal = ko.observable(Application.formats.portfolioTransDetail(self.data));
     self.transactionDetails = ko.observableArray(
-      ko.utils.arrayForEach(self.data.transaction_details || [],  function (transaction) {
+      ko.utils.arrayMap(self.data.transaction_details || [],  function (transaction) {
         return Application.formats.portfolioTransDetail(transaction);
-      })  || []
+      })
     );
     self.addNewTrans = function addNewTrans(newTransDetails) {
       $.each(newTransDetails, function (index, trans) {

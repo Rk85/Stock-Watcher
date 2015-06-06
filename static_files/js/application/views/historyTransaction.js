@@ -1,18 +1,17 @@
 (function (transaction, $) {
   var historyRows = function historyRows(data, parent) {
     var self = this;
-    self.data = data || {};
-    self.profileId =  ko.observable(self.data.profileId || 1);
-    self.companyName = ko.observable(self.data.companyName || 'companyName');
-    self.quantity = ko.observable(self.data.quantity || 0);
-    self.buyDate = ko.observable(self.data.buyDate || 'buy_date');
-    self.sallDate = ko.observable(self.data.sellDate || 'sell_date');
-    self.buyPrice = ko.observable(self.data.buyPrice || 'buyPrice');
-    self.sellPrice = ko.observable(self.data.sellPrice || 'sellPrice');
-    self.brokerAmount = ko.observable(self.data.brokerAmount || 'brokerAmount');
-    self.totalGain = ko.observable(self.data.totalGain || 'totalGain');
-    self.totalGainPercent = ko.observable(self.data.totalGainPercent || 'totalGainPercent');
-    self.tax = ko.observable(self.data.tax || 'tax');
+    self.profileId =  ko.observable(data.profileId || 1);
+    self.companyName = ko.observable(data.companyName || 'companyName');
+    self.quantity = ko.observable(data.quantity || 0);
+    self.buyDate = ko.observable(data.buyDate || 'buy_date');
+    self.sellDate = ko.observable(data.sellDate || 'sell_date');
+    self.buyPrice = ko.observable(data.buyPrice || 'buyPrice');
+    self.sellPrice = ko.observable(data.sellPrice || 'sellPrice');
+    self.brokerAmount = ko.observable(data.brokerAmount || 'brokerAmount');
+    self.totalGain = ko.observable(data.totalGain || 'totalGain');
+    self.totalGainPercent = ko.observable(data.totalGainPercent || 'totalGainPercent');
+    self.tax = ko.observable(data.tax || 'tax');
   }
 
   transaction.history = function history(data) {
@@ -71,14 +70,27 @@
     self.totalRows = ko.computed(function(){
       return self.selectedProfileHistoryRows() ? self.selectedProfileHistoryRows().length-1 : 0;
     })
-    //self.transModalDetails = ko.observable(new Application.stockWatcher.transModals({}, self));
+    self.transModalDetails = ko.observable(new Application.stockWatcher.historyTransModals({}, self));
+    self.updateTrans = function updateTrans(updateTransDetails){
+      var updateItem = Application.formats.portfolioTransDetail(updateTransDetails[0]);
+      var transItem = ko.utils.arrayFirst(self.transactionDetails() || [], function(item){
+          return item.id === updateItem.id;
+      })
+      if (transItem ){
+        var index = self.transactionDetails.indexOf(transItem);
+        if (index != -1){
+          self.transactionDetails.remove(transItem);
+          self.transactionDetails.splice(index, 0, updateItem);
+          }
+      }
+    };
 
     self.transactionAction = function transactionAction(actionId, rowData, event) {
       if (actionId === Application.staticData.EDIT) {
         rowData.headerName = 'Edit Transaction';
         rowData.isEdit = true;
         rowData.onSave = self.updateTrans;
-        // parent.transModalDetails(new Application.stockWatcher.transModals(rowData, parent));
+        self.transModalDetails(new Application.stockWatcher.historyTransModals(rowData, parent));
       } else if (actionId === Application.staticData.DEL) {
         Application.showAlert({
           msg: "Do you want to delete this Transaction?",

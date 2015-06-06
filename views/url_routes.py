@@ -140,7 +140,7 @@ def get_stock_invest():
     """
     if request.method == 'GET':
         response_data = {
-            'form': render_template('views/get_invest.html'),
+            'form': render_template('views/portfolioInvestment.html'),
             'response_data': {}
         }
         resp = make_response(jsonify(response_data), 200)
@@ -155,7 +155,7 @@ def get_trans_details():
     """
     if request.method == 'GET':
         response_data = {
-            'form': render_template('views/get_trans.html'),
+            'form': render_template('views/historyTransaction.html'),
             'response_data': {}
         }
         resp = make_response(jsonify(response_data), 200)

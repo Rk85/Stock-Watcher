@@ -1,4 +1,4 @@
-{% extends "views/get_trans_base.html" %}
+{% extends "views/historyTransactionBase.html" %}
 
 {% block transaction_history %}
 <div class="trans-history-table-head-append">
@@ -46,7 +46,7 @@
     'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: buyDate"></span></td>
   <td data-bind="css: {
     'history-trans-detail-column': $index() < $root.totalRows(),
-    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: sallDate"></span></td>
+    'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: sellDate"></span></td>
   <td data-bind="css: {
     'history-trans-detail-column': $index() < $root.totalRows(),
     'history-trans-detail-last-row': $index() == $root.totalRows()}"><span data-bind="text: buyPrice"></span></td>
@@ -72,6 +72,7 @@
       <span>
         <i data-bind="click: function(data, event) { 
                       $root.transactionAction(Application.staticData.EDIT, data, event);
+                      $('#historyTransModal').modal();
                     },
                   attr: { 
                     'data-toggle':'tooltip',

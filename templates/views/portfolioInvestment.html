@@ -1,4 +1,4 @@
-{% extends "views/get_invest_base.html" %}
+{% extends "views/portfolioInvestmentBase.html" %}
 
 {% block portfolio_header %}
 <div class="row-fluid">
@@ -95,7 +95,7 @@
           <span>
             <i  style="background-color: #ffffff" data-bind="click: function(data, event) { 
                     $root.companyAction(Application.staticData.ADD, data, event);
-                    $('#transAddModal').modal();
+                    $('#portfolioTransModal').modal();
                   },
                   attr: { 
                     'data-toggle':'tooltip',
@@ -158,7 +158,7 @@
     <span>
       <i data-bind="click: function(data, event) { 
                     $parent.transactionAction(Application.staticData.ADD, data, event);
-                    $('#transAddModal').modal();
+                    $('#portfolioTransModal').modal();
                   },
                   attr: { 
                     'data-toggle':'tooltip',
@@ -189,7 +189,7 @@
       <span>
         <i data-bind="click: function(data, event) { 
               $parent.transactionAction(Application.staticData.EDIT, data, event)
-              $('#transAddModal').modal();
+              $('#portfolioTransModal').modal();
             },
             attr: { 
               'data-toggle':'tooltip',
@@ -216,7 +216,7 @@
       <span>
         <i data-bind="click: function(data, event) { 
                       $parent.transactionAction(Application.staticData.EDIT, data, event);
-                      $('#transAddModal').modal();
+                      $('#portfolioTransModal').modal();
                     },
                   attr: { 
                     'data-toggle':'tooltip',

@@ -38,12 +38,12 @@
           companyName: self.transactionTotal().companyName,
           onSave: self.addNewTrans
         };
-        parent.transModalDetails(new Application.stockWatcher.transModals(newTransData, parent));
+        parent.transModalDetails(new Application.stockWatcher.portfolioTransModals(newTransData, parent));
       } else if (actionId === Application.staticData.EDIT) {
         rowData.headerName = 'Edit Transaction';
         rowData.isEdit = true;
         rowData.onSave = self.updateTrans;
-        parent.transModalDetails(new Application.stockWatcher.transModals(rowData, parent));
+        parent.transModalDetails(new Application.stockWatcher.portfolioTransModals(rowData, parent));
       } else if (actionId === Application.staticData.DEL) {
         Application.showAlert({
           msg: "Do you want to delete this Transaction?",
@@ -155,7 +155,7 @@
       }
       return [];
     });
-    self.transModalDetails = ko.observable(new Application.stockWatcher.transModals({}, self));
+    self.transModalDetails = ko.observable(new Application.stockWatcher.portfolioTransModals({}, self));
     self.companyAction = function companyAction(actionId, rowData, event) {
       if (actionId === Application.staticData.ADD) {
         alert('Add New Company');

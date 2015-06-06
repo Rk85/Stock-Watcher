@@ -1,0 +1,44 @@
+<div id="historyTransModal" class="modal hide fade tansAddModal" data-bind="with: $root.transModalDetails">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel" data-bind="text:headerName"></h3>
+  </div>
+  <div id="transModalBody" class="modal-body">
+    <table class="table modal-table">
+      <thead class="trans-table-head" >
+        <tr>
+          <th class="trans-table-head-company"><span>Company</span></th>
+          <th><span class="modal-header">Quantity</span></th>
+          <th><span class="modal-header">Buy Date</span></th>
+          <th><span class="modal-header">Sell Date</span></th>
+          <th><span class="modal-header">Buy Price</span></th>
+          <th><span class="modal-header">Sell Price</span></th>
+          <th><span class="modal-header">Comm Amt</span></th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: transDetails">
+        <tr>
+          <td class="'company-name-column'">
+            <a data-bind="text: companyName, css: 'company-name-name-link'"></a>
+          </td>
+          <td><input data-bind="value:quantity" type="text" class="input-mini"/></td>
+          <td>
+            <input data-bind="enable: false, value:buyDate, attr:{ id: 'datepicker_buy_'+$index()}"
+              type="text" class="input-small"></input>
+          </td>
+          <td>
+            <input data-bind="enable: false, value:sellDate, attr:{ id: 'datepicker_sell_'+$index()}"
+              type="text" class="input-small"></input>
+          </td>
+          <td><input data-bind="value:buyPrice" type="text" class="input-mini"/></td>
+          <td><input data-bind="value:sellPrice" type="text" class="input-mini"/></td>
+          <td><input data-bind="value:brokerAmount" type="text" class="input-mini"/></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button class="btn, modal-close-button" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button data-dismiss="modal" data-bind="enable: transDetails().length > 0, css: 'btn modal-default-button', click: saveAction">Save changes</button>
+  </div>
+</div>

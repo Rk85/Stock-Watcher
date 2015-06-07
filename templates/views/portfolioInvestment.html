@@ -188,8 +188,8 @@
       &nbsp;&nbsp;&nbsp;&nbsp;
       <span>
         <i data-bind="click: function(data, event) { 
-              $parent.transactionAction(Application.staticData.EDIT, data, event)
-              $('#portfolioTransModal').modal();
+              $parent.transactionAction(Application.staticData.SELL, data, event)
+              $('#historyTransModal').modal().show();
             },
             attr: { 
               'data-toggle':'tooltip',

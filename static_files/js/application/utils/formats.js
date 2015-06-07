@@ -35,4 +35,20 @@
       companyId: ko.utils.unwrapObservable(details.id) || '0'
     };
   };
+  formats.historyTransDetail = function historyTransDetail(details) {
+    return {
+      id: ko.utils.unwrapObservable(details.id) || '',
+      profileId: ko.utils.unwrapObservable(details.profileId) || '',
+      companyName: ko.utils.unwrapObservable(details.companyName) || '',
+      quantity: ko.utils.unwrapObservable(details.quantity) || '0',
+      buyPrice: ko.utils.unwrapObservable(details.buyPrice) || '0',
+      sellPrice: ko.utils.unwrapObservable(details.sellPrice) || '0',
+      buyDate: ko.utils.unwrapObservable(details.buyDate) || '0',
+      sellDate: ko.utils.unwrapObservable(details.sellDate) || '0',
+      brokerAmount: ko.utils.unwrapObservable(details.brokerAmount) || '0',
+      totalGain: ko.utils.unwrapObservable(details.totalGain) || '0',
+      totalGainPercent: ko.utils.unwrapObservable(details.totalGainPercent) || '0',
+      tax: ko.utils.unwrapObservable(details.tax) || '0',
+    };
+  };
 }(Application.namespace("Application.formats"), jQuery));

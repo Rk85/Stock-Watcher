@@ -3,18 +3,18 @@
     var self = this;
     self.newTransDetail = function newTransDetail(details) {
       return {
-        id: data.id || '',
-        profileId: data.profileId,
-        companyName: data.companyName,
-        quantity: data.quantity,
-        buyDate: data.buyDate,
-        sellDate: data.sellDate,
-        buyPrice: data.buyPrice,
-        sellPrice: data.sellPrice,
-        brokerAmount: data.brokerAmount,
-        totalGain: data.totalGain,
-        totalGainPercent: data.totalGainPercent,
-        tax: data.tax
+        id: ko.observable(data.id || ''),
+        profileId: ko.observable(data.profileId || ''),
+        companyName: ko.observable(data.companyName || ''),
+        quantity: ko.observable(data.quantity || ''),
+        buyDate: ko.observable(data.buyDate || ''),
+        sellDate: ko.observable(data.sellDate || ''),
+        buyPrice: ko.observable(data.buyPrice || ''),
+        sellPrice: ko.observable(data.sellPrice || ''),
+        brokerAmount: ko.observable(data.brokerAmount || ''),
+        totalGain: ko.observable(data.totalGain || ''),
+        totalGainPercent: ko.observable(data.totalGainPercent || ''),
+        tax: ko.observable(data.tax || '')
       };
     };
     self.headerName = ko.observable(data.headerName || 'Add New Transaction');

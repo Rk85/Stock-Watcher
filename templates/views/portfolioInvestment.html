@@ -110,20 +110,11 @@
     <tbody  data-bind="foreach: selectedProfileRows">
       {{ self.portfolio_total_trans_row() }}
       <!-- ko if: companyTransShow -->
-        <!-- ko foreach: transactionDetails -->
-          {{ self.portfolio_detail_trans_row() }}
+        <!-- ko if: transactionDetails().length > 0 -->
+        {{ self.portfolio_detail_trans_row() }}
         <!-- /ko -->
-        <tr data-bind="if: transactionDetails().length>0">
-          <td data-bind="css:{
-              'company-detail-share-last-row-first': true,
-              }"><div></div></td>
-          <td colspan="10" class="company-detail-share-last-row-other"></td>
-          <td data-bind="css:{
-              'company-detail-share-last-row-last': true,
-              }"><div></div></td>
-        </tr>
       <!-- /ko -->
-        {{ self.portfolio_company_other_details() }}
+      {{ self.portfolio_company_other_details() }}
     </tbody>
   </table>
 </div>
@@ -180,7 +171,27 @@
 {% endblock portfolio_total_trans_row %}
 
 {% block portfolio_detail_trans_row %}
-<tr class="company-detail-share-row">
+<tr>
+<td colspan="12" class="trans-detail-table">
+<table class="table trans-detail-table">
+<thead>
+      <tr>
+        <th><span>Bought Date</span></th>
+        <th><span>Quantity</span></th>
+        <th><span>Invoice Amount</span></th>
+        <th><span>Inv Price</span></th>
+        <th><span>Live Price</span></th>
+        <th><span>Day's Change</span></th>
+        <th><span>Day's Gain</span></th>
+        <th><span>Day's Gain%</span></th>
+        <th><span>Total Change</span></th>
+        <th><span>Total Gain</span></th>
+        <th><span>Total Gain%</span></th>
+        <th></th>
+      </tr>
+</thead>
+<tbody data-bind="foreach: transactionDetails">
+<tr>
   <td class="company-detail-share-column">
     <div>
       <span data-bind="text: invDate">
@@ -196,7 +207,7 @@
               'title':'Sell Transaction',
               'data-placement': 'top'
             },
-            css: 'icon-ok, company-action-column'">
+            css: 'icon-ok'">
         </i>&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
     </div>
@@ -211,7 +222,7 @@
   <td class="company-detail-share-column"><span data-bind="text: totalChange"></span></td>
   <td class="company-detail-share-column"><span data-bind="text: totalGain"></span></td>
   <td class="company-detail-share-column"><span data-bind="text: totalPercentage"></span></td>
-  <td class="company-detail-share-column company-detail-share-last-column">
+  <td class="company-detail-share-column">
     <div>
       <span>
         <i data-bind="click: function(data, event) { 
@@ -223,7 +234,7 @@
                     'title':'Edit Transaction',
                     'data-placement': 'top'
                   },
-                  css: 'icon-edit, company-action-column'">
+                  css: 'icon-edit'">
         </i>&nbsp;&nbsp;&nbsp;&nbsp;
         <i data-bind="click: function(data, event) { 
               $parent.transactionAction(Application.staticData.DEL, data, event)
@@ -233,11 +244,15 @@
               'title':'Remove Transaction',
               'data-placement': 'top'
             },
-            css: 'icon-remove-sign, company-action-column'">
+            css: 'icon-remove-sign'">
         </i>&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
     </div>
   </td>
+</tr>
+</tbody>
+</table>
+</td>
 </tr>
 {% endblock portfolio_detail_trans_row %}
 

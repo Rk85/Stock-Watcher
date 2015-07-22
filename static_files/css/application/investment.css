@@ -161,64 +161,25 @@ td.company-share-column{
 }
 
 /* Detailed/Individual Transaction Details for the companies*/
+td.trans-detail-table{
+  border: none;
+}
+.trans-detail-table{
+  border: 1px double #A31919;
+  padding: 0px;
+  margin: -2px;
+  background: #ffffff;
+  table-layout:fixed;
+  color: #006699;
+  border-collapse: separate;
+}
 td.company-detail-share-column{
-  border-top: 1px double #006699;
   font: bold 12px/12px Arial;
-  color: #000000;
+  border-top: 1px double #A31919;
+  color: #006699;
   text-decoration: none;
-  text-align:left;
+  text-align:center;
   vertical-align: middle;
-}
-tr.company-detail-share-row td.company-detail-share-column:first-child {
-  text-align:left;
-  border: none;
-}
-tr.company-detail-share-row td.company-detail-share-column:first-child div{
-  border-top: 1px double #006699;
-  border-left: 1px double #006699;
-  border-right: none;
-  margin-top: -6px;
-  margin-bottom: -8px;
-  margin-right: -6px;
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-td.company-detail-share-last-column {
-  border: none;
-}
-td.company-detail-share-last-column div{
-  border-top: 1px double #006699;
-  border-right: 1px double #006699;
-  border-left: none;
-  margin-top: -6px;
-  margin-bottom: -7px;
-  margin-left: -6px;
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 10px;
-  padding-bottom: 8px;
-}
-td.company-detail-share-last-row-first {
-  border-top: none; 
-}
-td.company-detail-share-last-row-first div{
-  border-top: 1px double #006699;
-  margin-top: -6px;
-  margin-right: -7px;
-  padding-top: 4px;
-}
-td.company-detail-share-last-row-other {
-  border-top: 1px double #006699;
-}
-td.company-detail-share-last-row-last {
-  border-top: none; 
-}
-td.company-detail-share-last-row-last div{
-  border-top: 1px double #006699;
-  margin-top: -6px;
-  margin-left: -7px;
 }
 
 /* Extra details for the company */

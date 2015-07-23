@@ -18,21 +18,21 @@
 
   formats.portfolioTransDetail = function formatProfileTransDetail(details) {
     return {
-      id: ko.utils.unwrapObservable(details.id) || '',
-      companyName: ko.utils.unwrapObservable(details.companyName) || '',
-      invPrice: ko.utils.unwrapObservable(details.invPrice) || '0',
-      invDate: ko.utils.unwrapObservable(details.invDate) || '',
-      quantity: ko.utils.unwrapObservable(details.quantity) || '0',
-      comments: ko.utils.unwrapObservable(details.comments) || '',
-      invTotalAmount: ko.utils.unwrapObservable(details.invTotalAmount) || '0',
-      livePrice: ko.utils.unwrapObservable(details.livePrice) || '0',
-      todayChange: ko.utils.unwrapObservable(details.todayChange) || '0',
-      todayGain: ko.utils.unwrapObservable(details.todayGain) || '0',
-      todayPercentage: ko.utils.unwrapObservable(details.todayPercentage) || '0',
-      totalChange: ko.utils.unwrapObservable(details.totalChange) || '0',
-      totalGain: ko.utils.unwrapObservable(details.totalGain) || '0',
-      totalPercentage: ko.utils.unwrapObservable(details.totalPercent) || '0',
-      companyId: ko.utils.unwrapObservable(details.id) || '0'
+      id: ko.utils.unwrapObservable(details.id || ''),
+      companyName: ko.utils.unwrapObservable(details.name || details.companyName || ''),
+      invPrice: ko.utils.unwrapObservable(details.inv_price || details.invPrice || ''),
+      invDate: ko.utils.unwrapObservable(details.inv_date || details.invDate || ''),
+      quantity: ko.utils.unwrapObservable(details.quantity || details.quantity || ''),
+      comments: ko.utils.unwrapObservable(details.comments || ''),
+      invTotalAmount: ko.utils.unwrapObservable(details.inv_total_amount || details.invTotalAmount || ''),
+      livePrice: ko.utils.unwrapObservable(details.live_price || details.livePrice || ''),
+      todayChange: ko.utils.unwrapObservable(details.today_change || details.todayChange || ''),
+      todayGain: ko.utils.unwrapObservable(details.today_gain || details.todayGain || ''),
+      todayPercentage: ko.utils.unwrapObservable(details.today_percentage || details.todayPercentage || ''),
+      totalChange: ko.utils.unwrapObservable(details.total_change || details.totalChange || ''),
+      totalGain: ko.utils.unwrapObservable(details.total_gain || details.totalGain || ''),
+      totalPercentage: ko.utils.unwrapObservable(details.total_percent || details.totalPercent || ''),
+      companyId: ko.utils.unwrapObservable(details.id || '')
     };
   };
   formats.historyTransDetail = function historyTransDetail(details) {

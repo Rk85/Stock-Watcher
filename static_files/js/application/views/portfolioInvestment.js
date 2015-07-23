@@ -2,10 +2,10 @@
   var profileCompanyDetails = function profileCompanyRows(data, parent) {
     var self = this;
     self.data = data || {};
-    self.profileId =  self.data.profileId || 1;
+    self.profileId =  self.data.profile_id || 0;
     self.companyId = self.data.id;
     self.companyTransShow = ko.observable(false);
-    self.transId = 1; // This will come from DB
+    self.transId = undefined; // This will come from DB
     self.transactionTotal = ko.observable(Application.formats.portfolioTransDetail(self.data));
     self.transactionDetails = ko.observableArray(
       ko.utils.arrayMap(self.data.transaction_details || [],  function (transaction) {
@@ -70,7 +70,7 @@
 
   investment.portFolio = function portFolio(data) {
     var self = this;
-    self.userName = ko.observable('Guest');
+    self.userName = ko.observable(data.user_name || 'Guest');
     self.showToday = ko.observable(true);
     self.changePortfolioType = function () {
       self.showToday(!self.showToday());
@@ -112,7 +112,6 @@
         }
         Application.graph.Init("portfolioGraph_total", options)
       }
-      
     }
     self.drawChart("today");
     self.todayDetails = ko.observable(Application.formats.portfolioTotalDetails({}));
@@ -131,33 +130,21 @@
           };
       }
     });
-    self.availableProfiles = ko.observableArray([
-      {
-        id: 1,
-        name: 'test'
-      },
-      {
-        id: 2,
-        name: 'test2'
+    self.availableProfiles = ko.observableArray($.map(data.user_profiles || [], function(item){
+      return {
+        id: item.id, name: item.name
       }
-    ]);
+    }));
     self.selectedProfile = ko.observable(self.availableProfiles()[0]);
-    self.availableRefreshRates = ko.observableArray([
-      {
-        id: 1,
-        name: '2 minutes'
-      },
-      {
-        id: 2,
-        name: '5 minutes'
+    self.availableRefreshRates = ko.observableArray($.map(data.refresh_rates || [], function(item){
+      return {
+        id: item.id, name: item.name
       }
-    ]);
+    }));
     self.selectedRefreshRate = ko.observable();
-    self.totalProfileTableRows = ko.observableArray([
-      new profileCompanyDetails({id: 1, companyName: "NAME1", profileId: 1}, self),
-      new profileCompanyDetails({id: 2, companyName: "NAME3", profileId: 1}, self),
-      new profileCompanyDetails({id: 3, companyName: "NAME2", profileId: 2}, self)
-    ]);
+    self.totalProfileTableRows = ko.observableArray($.map(data.company_details || [], function(item){
+      return new profileCompanyDetails(item, self);
+    }));
     self.selectedProfileRows = ko.computed(function () {
       if (self.selectedProfile()) {
         return ko.utils.arrayFilter(self.totalProfileTableRows() || [], function (row) {

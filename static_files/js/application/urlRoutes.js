@@ -6,11 +6,11 @@
           alert('home');
         });
         this.get("#/stock/invest", function (context) {
-          var url = "/stock/invest";
+          var url = "/api/1.0/portfolio_investment/";
           Application.Tab.GetContent(url);
         });
         this.get("#/stock/trans", function (context) {
-          var url = "/stock/trans";
+          var url = "/api/1.0/transaction_history/";
           Application.Tab.GetContent(url);
         });
       });

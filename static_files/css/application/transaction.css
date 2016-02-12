@@ -86,3 +86,13 @@ td.history-trans-detail-last-row {
   margin-left: -1px; 
   behavior: url(/static_files/pie/PIE.htc);
 }
+.trans-history-filters{
+  margin-top: 10px;
+}
+
+.trans-history-filters label {
+  display: inline;
+}
+.trans-filter-button {
+  vertical-align: top;
+}

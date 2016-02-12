@@ -34,13 +34,15 @@
             {
               showOn: 'button',
               buttonImage: 'static_files/css/images/calendar.gif',
-              buttonImageOnly: true
+              buttonImageOnly: true,
+              dateFormat: Application.staticData.DATE_FORMAT
           });
           $('#datepicker_sell_' + i).datepicker(
             {
               showOn: 'button',
               buttonImage: 'static_files/css/images/calendar.gif',
-              buttonImageOnly: true
+              buttonImageOnly: true,
+              dateFormat: Application.staticData.DATE_FORMAT
           });
         }
     })

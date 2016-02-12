@@ -1,5 +1,23 @@
 {% extends "views/historyTransactionBase.html" %}
 
+{% block transHistoryFilter %}
+<span> Filter
+  <select data-bind="options: filterCriteria, value: selectedFilterCriteria, css: 'input-medium'"></select>
+</span>
+<span  class="app-offset1"> From
+  <input data-bind="value: fromDate, enable: false, attr:{ id: 'trans_history_from'}"
+    type="text" class="input-small"></input>
+</span>
+<span class="app-offset1"> To
+  <input data-bind="value: toDate, enable: false, attr:{ id: 'trans_history_to'}"
+    type="text" class="input-small"></input>
+</span>
+<span class="app-offset1">
+  <button data-bind="css:'btn modal-default-button trans-filter-button', click: applyFilter">
+  Apply</button>
+</span>
+{% endblock transHistoryFilter %}
+
 {% block transaction_history %}
 <div class="trans-history-table-head-append">
 </div>

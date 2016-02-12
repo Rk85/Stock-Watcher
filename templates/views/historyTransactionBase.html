@@ -2,6 +2,9 @@
   <div class="row-fluid">
     <div class="span12 content-start">
       <span class="portfolio-lower-value">Transaction History</span>
+      <div class="trans-history-filters offset4">
+        {% block transHistoryFilter %}{% endblock transHistoryFilter %}
+      </div>
       <div class="trans-history-div">
         {% block transaction_history %}{% endblock transaction_history %}
       </div>
@@ -14,5 +17,17 @@
 var applyFormBindings = function (data, tab_id) {
   var model = new Application.stockWatcher.transaction.history(data);
   ko.applyBindings(model, $(tab_id)[0]);
+  $('#trans_history_from').datepicker({
+        showOn: 'button',
+        buttonImage: 'static_files/css/images/calendar.gif',
+        buttonImageOnly: true,
+        dateFormat: Application.staticData.DATE_FORMAT
+    });
+    $('#trans_history_to').datepicker({
+      showOn: 'button',
+      buttonImage: 'static_files/css/images/calendar.gif',
+      buttonImageOnly: true,
+      dateFormat: Application.staticData.DATE_FORMAT
+    });
 };
 </script>

@@ -108,3 +108,9 @@ input.search-query{
 .app-offset1{
   margin-left: 3%;
 }
+.positive-value {
+  color: #53a503;
+}
+.negative-value {
+  color: #c20000;
+}

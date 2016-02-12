@@ -25,11 +25,9 @@
   font: bold 28px/28px Arial;
 }
 .portfolio-positive{
-  color: #53a503;
   font: 18px/18px Arial;
 }
 .portfolio-negative{
-  color: #c20000;
   font: 18px/18px Arial;
 }
 
@@ -55,13 +53,11 @@
   margin: 0px;
 }
 .portfolio-lower-positive{
-  color: #53a503;
   font: 16px/16px Arial;
   padding: 0px;
   margin: 0px;
 }
 .portfolio-lower-negative{
-  color: #c20000;
   font: 16px/16px Arial;
   padding: 0px;
   margin: 0px;
@@ -165,7 +161,7 @@ td.trans-detail-table{
   border: none;
 }
 .trans-detail-table{
-  border: 1px double #A31919;
+  border: 1px double #006699;
   padding: 0px;
   margin: -2px;
   background: #ffffff;
@@ -175,7 +171,7 @@ td.trans-detail-table{
 }
 td.company-detail-share-column{
   font: bold 12px/12px Arial;
-  border-top: 1px double #A31919;
+  border-top: 1px double #006699;
   color: #006699;
   text-decoration: none;
   text-align:center;

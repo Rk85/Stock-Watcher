@@ -4,7 +4,7 @@
       totalValue: details.total_value || "877,234",
       totalChange: details.total_change || "+10000",
       changePercent: details.change_percent || "(+15.0%)",
-      valueInc: details.value_inc || true,
+      valueInc: details.value_inc || false,
       maxGainerName: details.max_gainer_name || 'Company Name',
       maxGainerValue: details.max_gainer_value || 30.50,
       maxGainerChange: details.max_gainer_change || "+5.50",
@@ -32,7 +32,7 @@
       totalChange: ko.utils.unwrapObservable(details.total_change || details.totalChange || ''),
       totalGain: ko.utils.unwrapObservable(details.total_gain || details.totalGain || ''),
       totalPercentage: ko.utils.unwrapObservable(details.total_percent || details.totalPercent || ''),
-      companyId: ko.utils.unwrapObservable(details.id || '')
+      companyId: ko.utils.unwrapObservable(details.company_id || '')
     };
   };
   formats.historyTransDetail = function historyTransDetail(details) {

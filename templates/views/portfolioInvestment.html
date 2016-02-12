@@ -1,24 +1,25 @@
 {% extends "views/portfolioInvestmentBase.html" %}
 
 {% block portfolio_header %}
-<div class="row-fluid">
-  <div data-bind="css:'portfolio-header', with: portFolioDetails">
-    <p class="portfolio-header-desc" > MY NETWORTH 
-    <span data-bind="text: linkName,css: 'portfolio-change pull-right', 
+<div data-bind="css:'portfolio-header', with: portFolioDetails">
+  <p class="portfolio-header-desc" > MY NETWORTH 
+  <span data-bind="text: linkName,css: 'portfolio-change pull-right', 
               click: $root.changePortfolioType"></span>
-    </p>
-    <p data-bind="with: linkValue">
-      <span class="portfolio-header-value" data-bind="text: totalValue"></span>
-      <span>&nbsp;</span>
-      <span class="portfolio-positive"><strong data-bind="text: totalChange"></strong> </span>
-      <span class="portfolio-positive" data-bind="text: changePercent"></span>
-      <span> <img data-bind="attr: {
-          src: valueInc ? '/static_files/css/images/up.gif' : '/static_files/images/down.gif', 
+  </p>
+  <p data-bind="with: linkValue">
+    <span class="portfolio-header-value" data-bind="text: totalValue"></span>
+    <span>&nbsp;</span>
+    <span data-bind="css: valueInc ? 'portfolio-positive positive-value' : 'portfolio-negative negative-value'">
+      <strong data-bind="text: totalChange"></strong>
+    </span>
+    <span data-bind="text: changePercent, css: valueInc ? 'portfolio-positive positive-value' : 'portfolio-negative negative-value'">
+    </span>
+    <span> <img data-bind="attr: {
+          src: valueInc ? '/static_files/css/images/up.gif' : '/static_files/css/images/down.gif', 
           'height': '22', 'width': '22'
         }, css: 'img-circle'"></img>
-      </span>
-    </p>
-  </div>
+    </span>
+  </p>
 </div>
 {% endblock portfolio_header %}
 
@@ -28,8 +29,8 @@
   <p class="portfolio-lower-company" data-bind="text: maxGainerName"></p>
   <p class="portfolio-lower-value" data-bind="text: maxGainerValue"></p>
   <p>
-  <span class="portfolio-lower-positive"><strong data-bind="text: maxGainerChange"></strong></span>
-    <span class="portfolio-lower-positive" data-bind="text: maxGainerChangePercent"></span>
+  <span class="portfolio-lower-positive positive-value"><strong data-bind="text: maxGainerChange"></strong></span>
+    <span class="portfolio-lower-positive positive-value" data-bind="text: maxGainerChangePercent"></span>
     <span> <img data-bind="attr: {
           src: '/static_files/css/images/up.gif',
           height:'20', width:'20'
@@ -43,10 +44,10 @@
 <div class="span6 portfolio-lower2" data-bind="with: portFolioDetails().linkValue">
   <p data-bind="css: 'portfolio-header-desc'" > MAX LOSER </p>
   <p class="portfolio-lower-company" data-bind="text: maxLoserName"></p>
-  <p class="portfolio-lower-value" data-bind="text: maxLoserValue"><p>
+  <p class="portfolio-lower-value" data-bind="text: maxLoserValue"></p>
   <p>
-    <span class="portfolio-lower-negative"><strong data-bind="text: maxLoserChange"></strong></span>
-    <span class="portfolio-lower-negative" data-bind="text: maxLoserChangePercent"></span>
+    <span class="portfolio-lower-negative negative-value"><strong data-bind="text: maxLoserChange"></strong></span>
+    <span class="portfolio-lower-negative negative-value" data-bind="text: maxLoserChangePercent"></span>
     <span> <img data-bind="attr: {
           src: '/static_files/css/images/down.gif',
           height:'20', width:'20'
@@ -139,12 +140,12 @@
   <td class="company-share-column"><span data-bind="text: invTotalAmount"></span></td>
   <td class="company-share-column"><span data-bind="text: invPrice"></span></td>
   <td class="company-share-column"><span data-bind="text: livePrice"></span></td>
-  <td class="company-share-column"><span data-bind="text: todayChange"></span></td>
-  <td class="company-share-column"><span data-bind="text: todayGain"></span></td>
-  <td class="company-share-column"><span data-bind="text: todayPercentage"></span></td>
-  <td class="company-share-column"><span data-bind="text: totalChange"></span></td>
-  <td class="company-share-column"><span data-bind="text: totalGain"></span></td>
-  <td class="company-share-column"><span data-bind="text: totalPercentage"></span></td>
+  <td class="company-share-column"><span data-bind="css: todayChange > 0 ? 'positive-value' : 'negative-value', text: todayChange"></span></td>
+  <td class="company-share-column"><span data-bind="css: todayChange > 0 ? 'positive-value' : 'negative-value', text: todayGain"></span></td>
+  <td class="company-share-column"><span data-bind="css: todayChange > 0 ? 'positive-value' : 'negative-value', text: todayPercentage"></span></td>
+  <td class="company-share-column"><span data-bind="css: totalChange > 0 ? 'positive-value' : 'negative-value', text: totalChange"></span></td>
+  <td class="company-share-column"><span data-bind="css: totalChange > 0 ? 'positive-value' : 'negative-value', text: totalGain"></span></td>
+  <td class="company-share-column"><span data-bind="css: totalChange > 0 ? 'positive-value' : 'negative-value', text: totalPercentage"></span></td>
   <td class="company-share-column">
     <span>
       <i data-bind="click: function(data, event) { 
@@ -216,12 +217,12 @@
   <td class="company-detail-share-column"><span data-bind="text: invTotalAmount"></span></td>
   <td class="company-detail-share-column"><span data-bind="text: invPrice"></span></td>
   <td class="company-detail-share-column"><span data-bind="text: livePrice"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: todayChange"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: todayGain"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: todayPercentage"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: totalChange"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: totalGain"></span></td>
-  <td class="company-detail-share-column"><span data-bind="text: totalPercentage"></span></td>
+  <td class="company-detail-share-column"><span data-bind="css: todayChange > 0 ? 'positive-value' : 'negative-value', text: todayChange"></span></td>
+  <td class="company-detail-share-column"><span data-bind="css: todayChange > 0 ? 'positive-value' : 'negative-value', text: todayGain"></span></td>
+  <td class="company-detail-share-column"><span data-bind="css: todayChange > 0 ? 'positive-value' : 'negative-value', text: todayPercentage"></span></td>
+  <td class="company-detail-share-column"><span data-bind="css: totalChange > 0 ? 'positive-value' : 'negative-value', text: totalChange"></span></td>
+  <td class="company-detail-share-column"><span data-bind="css: totalChange > 0 ? 'positive-value' : 'negative-value', text: totalGain"></span></td>
+  <td class="company-detail-share-column"><span data-bind="css: totalChange > 0 ? 'positive-value' : 'negative-value', text: totalPercentage"></span></td>
   <td class="company-detail-share-column">
     <div>
       <span>

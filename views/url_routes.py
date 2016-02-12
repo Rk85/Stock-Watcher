@@ -9,7 +9,7 @@ web_routes = Module(__name__, url_prefix="/stock", name="stock_routes")
 
 def get_all_companies():
     '''
-        Description: Retrives all the available company details
+        description: Retrives all the available company details
                         in the exchanges
 
     '''
@@ -180,7 +180,24 @@ def get_stock_invest():
                         'total_change': 340,
                         'total_gain': 10,
                         'total_percent': '10%',
-                        'transaction_details': []
+                        'transaction_details': [
+                            {
+                                'id': 1,
+                                'name': 'Company Name1',
+                                'inv_price': 23,
+                                'inv_date': "01/02/2016",
+                                'quantity': 1000,
+                                'inv_total_amount': 23000,
+                                'live_price': 25,
+                                'today_change': 2,
+                                'today_gain': 2000,
+                                'today_percentage': "10%",
+                                'total_change': -2,
+                                'total_gain': 2000,
+                                'total_percent': "10%",
+                                'company_id': 1
+                            }
+                        ]
                     },
                     {
                         'profile_id': 2,
@@ -193,10 +210,10 @@ def get_stock_invest():
                         'comments': '',
                         'inv_total_amount': 100000,
                         'live_price': 30,
-                        'today_change': 1,
+                        'today_change': -1,
                         'today_gain': 3,
                         'today_percentage': '3%',
-                        'total_change': 10,
+                        'total_change': -10,
                         'total_gain': 30,
                         'total_percent': '20%',
                         'transaction_details': []
@@ -212,10 +229,10 @@ def get_stock_invest():
                         'comments': '',
                         'inv_total_amount': 100000,
                         'live_price': 30,
-                        'today_change': 1,
+                        'today_change': -1,
                         'today_gain': 13,
                         'today_percentage': '3%',
-                        'total_change': 10,
+                        'total_change': -10,
                         'total_gain': 301,
                         'total_percent': '30%',
                         'transaction_details': []

@@ -9,7 +9,9 @@ web_routes = Module(__name__, url_prefix="/stock", name="stock_routes")
 
 def get_all_companies():
     '''
-        description: Retrives all the available company details
+        description:
+
+            Retrives all the available company details
                         in the exchanges
 
     '''
@@ -42,7 +44,9 @@ def get_all_companies():
 
 def get_symbol_details(symbol):
     '''
-        Description: Given a symbol it retrieves the details about the
+        description:
+
+            Given a symbol it retrieves the details about the
                       symbol
 
         input_param : symbol - selected symbol
@@ -134,10 +138,12 @@ def get_quote(symbol=None):
 
 @web_routes.route('/invest', methods=['GET'])
 def get_stock_invest():
-    """
-        description : View function to Handle the clients display requests
+    '''
+        description :
 
-    """
+                View function to Handle the clients display requests
+
+    '''
     if request.method == 'GET':
         response_data = {
             'form': render_template('views/portfolioInvestment.html'),
@@ -247,7 +253,9 @@ def get_stock_invest():
 @web_routes.route('/trans', methods=['GET'])
 def get_trans_details():
     """
-        description : View function to Handle the clients display requests
+        description :
+
+            View function to Handle the clients display requests
 
     """
     if request.method == 'GET':

@@ -255,7 +255,7 @@ def get_trans_details():
     """
         description :
 
-            View function to Handle the clients display requests
+            View function to Handle the clients transaction display requests
 
     """
     if request.method == 'GET':
